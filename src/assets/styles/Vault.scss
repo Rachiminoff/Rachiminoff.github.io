@@ -1,0 +1,111 @@
+.vault-container {
+    padding: 5% 10%;
+    text-align: left;
+    color: #f5f5f5;
+}
+
+.vault-container h1 {
+    margin-bottom: 30px;
+    color: #e0e0e0;
+}
+
+.vault-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.vault-card {
+    background-color: #2b2b2b; // dark card
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.5);
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+}
+
+.vault-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.7);
+}
+
+.vault-card img {
+    width: 100%;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    object-fit: cover;
+}
+
+.vault-type {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #9c27b0;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+.vault-card h2 a {
+    text-decoration: none;
+    color: #f5f5f5;
+}
+
+.vault-card h2 a:hover {
+    text-decoration: underline;
+    color: #ffeb3b;
+}
+
+.tech-tags {
+    margin-top: 10px;
+}
+
+.tech-tags span {
+    display: inline-block;
+    background-color: #9c27b0;
+    color: white;
+    font-size: 0.7rem;
+    padding: 2px 6px;
+    margin-right: 4px;
+    border-radius: 3px;
+}
+
+.pdf-viewer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.pdf-viewer iframe {
+    width: 80%;
+    height: 90%;
+    border-radius: 8px;
+    background: #fff;
+}
+
+.pdf-viewer .close-btn {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 2rem;
+    color: #fff;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 700px) {
+    .vault-container {
+        padding: 5%;
+    }
+
+    .vault-grid {
+        grid-template-columns: 1fr;
+    }
+}
