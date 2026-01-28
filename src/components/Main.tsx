@@ -1,34 +1,55 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import Vault from './Vault'; 
 import '../assets/styles/Main.scss';
 
 function Main() {
-  const [clickCount, setClickCount] = useState(0);
+  const [nameClicks, setNameClicks] = useState(0);
+  const [titleClicks, setTitleClicks] = useState(0);
   const [showVaultPrompt, setShowVaultPrompt] = useState(false);
-  const [vaultCode, setVaultCode] = useState('');
+  const [vaultInput, setVaultInput] = useState('');
   const [vaultUnlocked, setVaultUnlocked] = useState(false); 
-  const secretCode = "letmein"; 
+  const [isMobile, setIsMobile] = useState(false);
+
+  const rainbowKeyParts = ['l','e','t','m','e','i','n'];
+  const rainbowKey = rainbowKeyParts.join('');
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const handleNameClick = () => {
-    const newCount = clickCount + 1;
-    setClickCount(newCount);
+    if (!isMobile) return;
+    const newCount = nameClicks + 1;
+    setNameClicks(newCount);
+    if (newCount < 20) setTitleClicks(0);
+  };
 
-    if (newCount >= 8) {
-      setShowVaultPrompt(true);
-      setClickCount(0); 
+  const handleTitleClick = () => {
+    if (!isMobile) return;
+    if (nameClicks >= 20) {
+      const newCount = titleClicks + 1;
+      setTitleClicks(newCount);
+      if (newCount >= 10) {
+        setShowVaultPrompt(true);
+        setNameClicks(0);
+        setTitleClicks(0);
+      }
     }
   };
 
   const handleVaultSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (vaultCode === secretCode) {
-      setVaultUnlocked(true);  
+    if (vaultInput === rainbowKey) {
+      setVaultUnlocked(true);
     } else {
       alert("Incorrect code!");
     }
-    setVaultCode('');
+    setVaultInput('');
     setShowVaultPrompt(false);
   };
 
@@ -44,15 +65,17 @@ function Main() {
           <h1 onClick={handleNameClick} style={{ cursor: "pointer" }}>
             Tanya Denise Yambao
           </h1>
-          <p>Computer Science Student</p>
+          <p onClick={handleTitleClick} style={{ cursor: "pointer" }}>
+            Computer Science Student
+          </p>
 
           {showVaultPrompt && (
             <form onSubmit={handleVaultSubmit} style={{ marginTop: '10px' }}>
               <input
                 type="password"
-                placeholder="Enter the secret code"
-                value={vaultCode}
-                onChange={(e) => setVaultCode(e.target.value)}
+                placeholder="Enter code"
+                value={vaultInput}
+                onChange={(e) => setVaultInput(e.target.value)}
                 autoFocus
                 style={{ padding: '5px', borderRadius: '4px', border: '1px solid #ccc' }}
               />
