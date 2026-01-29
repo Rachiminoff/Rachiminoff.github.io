@@ -12,14 +12,7 @@ interface VaultItem {
 }
 
 const vaultItems: VaultItem[] = [
-    {
-        name: "少女妄想中。",
-        type: "Translation",
-        description: "A delusion, or fantasy?",
-        pdf: "https://drive.google.com/file/d/1KZsFjCamOb-wWdVhMap1xNm9S9cT83Y_/view?usp=sharing",
-        tech: ["Docs"],
-        image: "https://m.media-amazon.com/images/I/71dkU5NMNgL._SL1500_.jpg"
-    }
+
 ];
 
 function Vault() {
