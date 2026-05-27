@@ -187,7 +187,7 @@ function Project() {
                         <iframe
                             width="100%"
                             height="300"
-                            src="https://youtu.be/CAeP5QStOrE?si=DJNTK_-Izf-jkrx6E"
+                            src="https://www.youtube.com/embed/CAeP5QStOrE?si=M8axOWtdfKER_7OF"
                             title="FREE FREE FREE Demo"
                             frameBorder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
