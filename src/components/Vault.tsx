@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import '../assets/styles/Vault.scss';
-
+import "../assets/styles/Vault.scss";
 import { supabase } from "../lib/supabase";
 
 interface VaultItem {
@@ -9,15 +8,12 @@ interface VaultItem {
     type: string;
     description: string;
     link?: string;
-    pdf?: string;
     image?: string;
 }
 
 function Vault() {
-
     const [vaultItems, setVaultItems] = useState<VaultItem[]>([]);
     const [loading, setLoading] = useState(true);
-
     const [pdfUrl, setPdfUrl] = useState<string | null>(null);
 
     useEffect(() => {
@@ -25,16 +21,15 @@ function Vault() {
     }, []);
 
     const fetchVaultItems = async () => {
-
         setLoading(true);
 
         const { data, error } = await supabase
-            .from('vault_items')
-            .select('*')
-            .order('created_at', { ascending: false });
+            .from("vault_items")
+            .select("*")
+            .order("created_at", { ascending: false });
 
         if (error) {
-            console.error("Supabase Error:", error);
+            console.error(error);
         } else {
             setVaultItems(data || []);
         }
@@ -42,20 +37,19 @@ function Vault() {
         setLoading(false);
     };
 
-    const openPdf = (url: string) => {
+    const openViewer = (url: string) => {
+        if (!url) return;
 
+        // Google Drive PDF handling
         const match = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
 
-        if (!match) {
-            alert("Invalid PDF link");
-            return;
+        if (match) {
+            const fileId = match[1];
+            setPdfUrl(`https://drive.google.com/file/d/${fileId}/preview`);
+        } else {
+            // fallback: open normal URL inside iframe
+            setPdfUrl(url);
         }
-
-        const fileId = match[1];
-
-        setPdfUrl(
-            `https://drive.google.com/file/d/${fileId}/preview`
-        );
 
         document.body.style.overflow = "hidden";
     };
@@ -66,26 +60,15 @@ function Vault() {
     };
 
     return (
-
         <div className="vault-container">
-
             <h1>Vault Library</h1>
 
             {loading ? (
-
                 <p>Loading vault...</p>
-
             ) : (
-
                 <div className="vault-grid">
-
                     {vaultItems.map((item) => (
-
-                        <div
-                            key={item.id}
-                            className="vault-card"
-                        >
-
+                        <div key={item.id} className="vault-card">
                             {item.image && (
                                 <img
                                     src={item.image}
@@ -94,69 +77,40 @@ function Vault() {
                                 />
                             )}
 
-                            <div className="vault-type">
-                                {item.type}
-                            </div>
+                            <div className="vault-type">{item.type}</div>
 
                             <h2>
-
-                                {item.pdf ? (
-                                        <button
-                                            className="vault-link-button"
-                                            onClick={() => openPdf(item.pdf!)}
-                                        >
-                                                                      {item.name}
-                                    </button>
-
-                                ) : item.link ? (
-
-                                    <a
-                                        href={item.link}
-                                        target="_blank"
-                                        rel="noreferrer"
+                                {item.link ? (
+                                    <button
+                                        className="vault-link-button"
+                                        onClick={() => openViewer(item.link!)}
                                     >
                                         {item.name}
-                                    </a>
-
+                                    </button>
                                 ) : (
-
                                     item.name
-
                                 )}
-
                             </h2>
 
                             <p>{item.description}</p>
-
                         </div>
-
                     ))}
-
                 </div>
-
             )}
 
             {pdfUrl && (
-
                 <div className="pdf-viewer">
-
-                    <button
-                        className="close-btn"
-                        onClick={closeViewer}
-                    >
+                    <button className="close-btn" onClick={closeViewer}>
                         ×
                     </button>
 
                     <iframe
                         src={pdfUrl}
                         frameBorder="0"
-                        title="PDF Viewer"
-                    ></iframe>
-
+                        title="Viewer"
+                    />
                 </div>
-
             )}
-
         </div>
     );
 }
