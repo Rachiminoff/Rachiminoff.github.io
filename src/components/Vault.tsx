@@ -105,7 +105,7 @@ function Vault() {
                                             className="vault-link-button"
                                             onClick={() => openPdf(item.pdf!)}
                                         >
-                                                           {item.name}
+                                                                      {item.name}
                                     </button>
 
                                 ) : item.link ? (
