@@ -26,7 +26,6 @@ function Navigation({ parentToChild, modeChange }: any) {
   const [scrolled, setScrolled] = useState<boolean>(false);
 
   const navigate = useNavigate();
-  const location = useLocation();
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
