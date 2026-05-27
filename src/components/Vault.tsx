@@ -14,7 +14,8 @@ interface VaultItem {
 function Vault() {
     const [vaultItems, setVaultItems] = useState<VaultItem[]>([]);
     const [loading, setLoading] = useState(true);
-    const [pdfUrl, setPdfUrl] = useState<string | null>(null);
+
+    const [viewerUrl, setViewerUrl] = useState<string | null>(null);
 
     useEffect(() => {
         fetchVaultItems();
@@ -37,25 +38,25 @@ function Vault() {
         setLoading(false);
     };
 
-    const openViewer = (url: string) => {
+    const openViewer = (url?: string) => {
         if (!url) return;
 
-        // Google Drive PDF handling
+        let finalUrl = url;
+
+        // Convert Google Drive link → embeddable PDF viewer
         const match = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
 
         if (match) {
             const fileId = match[1];
-            setPdfUrl(`https://drive.google.com/file/d/${fileId}/preview`);
-        } else {
-            // fallback: open normal URL inside iframe
-            setPdfUrl(url);
+            finalUrl = `https://drive.google.com/file/d/${fileId}/preview`;
         }
 
+        setViewerUrl(finalUrl);
         document.body.style.overflow = "hidden";
     };
 
     const closeViewer = () => {
-        setPdfUrl(null);
+        setViewerUrl(null);
         document.body.style.overflow = "";
     };
 
@@ -83,7 +84,7 @@ function Vault() {
                                 {item.link ? (
                                     <button
                                         className="vault-link-button"
-                                        onClick={() => openViewer(item.link!)}
+                                        onClick={() => openViewer(item.link)}
                                     >
                                         {item.name}
                                     </button>
@@ -98,16 +99,17 @@ function Vault() {
                 </div>
             )}
 
-            {pdfUrl && (
+            {/* ✅ PDF / Document Viewer Overlay */}
+            {viewerUrl && (
                 <div className="pdf-viewer">
                     <button className="close-btn" onClick={closeViewer}>
                         ×
                     </button>
 
                     <iframe
-                        src={pdfUrl}
+                        src={viewerUrl}
+                        title="Vault Viewer"
                         frameBorder="0"
-                        title="Viewer"
                     />
                 </div>
             )}
