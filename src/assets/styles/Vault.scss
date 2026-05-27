@@ -3,9 +3,6 @@
     color: white;
 }
 
-/* ========================================
-   TITLE
-======================================== */
 
 .vault-container h1 {
     margin-bottom: 3rem;
@@ -15,10 +12,6 @@
     color: white;
 }
 
-/* ========================================
-   GRID
-   MAX 3 PER ROW
-======================================== */
 
 .vault-grid {
     display: grid;
@@ -27,14 +20,22 @@
         repeat(3, minmax(0, 1fr));
 
     gap: 2rem;
+
+    @media (max-width: 1024px) {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    @media (max-width: 640px) {
+        grid-template-columns:
+            repeat(1, minmax(0, 1fr));
+
+        gap: 1.25rem;
+    }
 }
 
-/* ========================================
-   CARD
-======================================== */
-
 .vault-book-card {
-    background: #6d3f57;
+    background: #5000ca;
 
     border-radius: 18px;
 
@@ -59,10 +60,6 @@
     box-shadow:
         0 18px 40px rgba(0,0,0,0.45);
 }
-
-/* ========================================
-   IMAGE
-======================================== */
 
 .vault-book-image-wrapper {
     position: relative;
@@ -98,8 +95,6 @@
     transform: rotate(-3deg) scale(1.02);
 }
 
-/* fake pages */
-
 .vault-book-image-wrapper::after {
     content: "";
 
@@ -123,10 +118,6 @@
 
     z-index: -1;
 }
-
-/* ========================================
-   CONTENT
-======================================== */
 
 .vault-book-content {
     display: flex;
@@ -180,10 +171,6 @@
     flex: 1;
 }
 
-/* ========================================
-   TAGS
-======================================== */
-
 .vault-book-tags {
     margin-bottom: 1.5rem;
 }
@@ -193,10 +180,6 @@
 
     font-size: 0.95rem;
 }
-
-/* ========================================
-   BUTTON
-======================================== */
 
 .vault-read-btn {
     border: 2px solid rgba(255,255,255,0.7);
@@ -226,10 +209,6 @@
     transform: translateY(-2px);
 }
 
-/* ========================================
-   PDF / DOCUMENT VIEWER
-   PC WINDOW STYLE
-======================================== */
 
 .pdf-viewer {
     position: fixed;
@@ -255,10 +234,6 @@
     animation: viewerFade 0.2s ease;
 }
 
-/* ========================================
-   WINDOW
-======================================== */
-
 .pdf-window {
     width: min(1500px, 100%);
     height: 94%;
@@ -280,9 +255,6 @@
     animation: windowPop 0.2s ease;
 }
 
-/* ========================================
-   TOP BAR
-======================================== */
 
 .pdf-window-topbar {
     height: 52px;
@@ -412,9 +384,6 @@
     background: #ff5f57;
 }
 
-/* ========================================
-   IFRAME AREA
-======================================== */
 
 .pdf-frame-wrapper {
     position: relative;
@@ -432,10 +401,6 @@
 
     background: white;
 }
-
-/* ========================================
-   LOADING
-======================================== */
 
 .viewer-loading {
     position: absolute;

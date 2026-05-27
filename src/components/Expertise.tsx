@@ -12,6 +12,7 @@ import {
   faCss3Alt,
   faJs,
   faPython,
+
 } from "@fortawesome/free-brands-svg-icons";
 
 import Chip from "@mui/material/Chip";
