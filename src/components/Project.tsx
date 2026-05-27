@@ -139,7 +139,7 @@ function Project() {
                     <div className="video-container">
                         <iframe
                             width="100%"
-                            height="250"
+                            height="300"
                             src="https://www.youtube.com/embed/Zclw7GV7w7I"
                             title="Webnovel Extractor Demo"
                             frameBorder="0"
@@ -186,8 +186,8 @@ function Project() {
                     <div className="video-container">
                         <iframe
                             width="100%"
-                            height="250"
-                            src="https://youtu.be/CAeP5QStOrE?si=xpiuUyvyjJY3nKlp"
+                            height="300"
+                            src="https://youtu.be/CAeP5QStOrE"
                             title="FREE FREE FREE Demo"
                             frameBorder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
