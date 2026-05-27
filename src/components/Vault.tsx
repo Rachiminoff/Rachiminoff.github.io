@@ -79,49 +79,68 @@ function Vault() {
             <h1>Vault Library</h1>
 
             {loading ? (
-                <p>Loading vault...</p>
+                <p className="vault-loading-text">Loading vault...</p>
             ) : (
                 <div className="vault-grid">
                     {vaultItems.map((item) => (
                         <div key={item.id} className="vault-card">
-                            {item.image && (
-                                <img
-                                    src={item.image}
-                                    alt={item.name}
-                                    className="vault-image"
-                                />
-                            )}
-
-                            <div className="vault-type">
-                                {item.type}
+                            
+                            {/* LEFT COLUMN: Book Cover Wrapper */}
+                            <div className="book-cover-container">
+                                {item.image ? (
+                                    <img
+                                        src={item.image}
+                                        alt={item.name}
+                                        className="vault-image"
+                                    />
+                                ) : (
+                                    <div className="vault-image-placeholder">
+                                        <span>No Cover Available</span>
+                                    </div>
+                                )}
                             </div>
 
-                            <h2>
-                                {item.link ? (
-                                    <button
-                                        className="vault-link-button"
+                            {/* RIGHT COLUMN: Content Info Block */}
+                            <div className="book-details-box">
+                                <h2 className="book-title">
+                                    {item.link ? (
+                                        <button
+                                            className="vault-link-button"
+                                            onClick={() => openViewer(item.link)}
+                                        >
+                                            {item.name}
+                                        </button>
+                                    ) : (
+                                        item.name
+                                    )}
+                                </h2>
+
+                                <p className="book-description">
+                                    {item.description || "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa elit lectus enim id euismod."}
+                                </p>
+
+                                <div className="vault-type">
+                                    {item.type || "Novel-History-Love"}
+                                </div>
+
+                                {item.link && (
+                                    <button 
+                                        className="now-read-btn"
                                         onClick={() => openViewer(item.link)}
                                     >
-                                        {item.name}
+                                        Now Read!
                                     </button>
-                                ) : (
-                                    item.name
                                 )}
-                            </h2>
+                            </div>
 
-                            <p>{item.description}</p>
                         </div>
                     ))}
                 </div>
             )}
 
             {/* ---------------- PDF / Document Viewer ---------------- */}
-
             {viewerUrl && (
-                <div
-                    className="pdf-viewer"
-                    onClick={closeViewer}
-                >
+                <div className="pdf-viewer" onClick={closeViewer}>
                     <button
                         className="close-btn"
                         onClick={(e) => {
@@ -129,7 +148,7 @@ function Vault() {
                             closeViewer();
                         }}
                     >
-                        ×
+                        &times;
                     </button>
 
                     {viewerLoading && (
