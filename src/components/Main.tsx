@@ -91,7 +91,7 @@ function Main() {
                         onClick={handleSecretClick}
                         style={{ cursor: "pointer" }}
                     >
-                        Computer Science Student
+                        Full-Stack Developer (Product & Systems Focused)
                     </p>
 
                     {/* Vault Prompt */}

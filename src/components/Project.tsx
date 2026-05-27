@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 
+import uniq00 from '../assets/images/uq0.jpg';
 import uniq01 from '../assets/images/uq1.jpg';
 import uniq02 from '../assets/images/uq2.jpg';
 import uniq03 from '../assets/images/uq3.jpg';
 
+import wais00 from '../assets/images/ww0.jpg';
 import wais01 from '../assets/images/ww1.jpg';
 import wais02 from '../assets/images/ww2.jpg';
 import wais03 from '../assets/images/ww3.jpg';
@@ -26,6 +28,7 @@ function GitHubIcon() {
 /* =========================
    IMAGE SLIDER
 ========================= */
+
 type ImageSliderProps = {
     images: string[];
     link: string;
@@ -81,189 +84,269 @@ function ImageSlider({ images, link, title }: ImageSliderProps) {
     );
 }
 
+/* =========================
+   PROJECT DATA
+========================= */
+
+const projects = [
+    {
+        title: "UniQuest",
+        role: "Lead Developer",
+        roleClass: "lead",
+        featured: true,
+        link: "https://github.com/Skabeez/UniQuest",
+        images: [uniq00, uniq01, uniq02, uniq03],
+
+        oneliner:
+            "Gamified productivity platform for university students.",
+
+        description:
+            "Designed to make university life feel less overwhelming through progression systems, missions, and campus-focused utilities with real-time synchronization across devices.",
+
+        features: [
+            "Task & mission system",
+            "Real-time synchronization",
+            "Cross-platform mobile support",
+            "Campus-focused utilities"
+        ],
+
+        tech: [
+            "FlutterFlow",
+            "Dart",
+            "Supabase"
+        ]
+    },
+
+    {
+        title: "Webnovel Extractor",
+        role: "Main Developer",
+        roleClass: "lead",
+        featured: false,
+        link: "https://github.com/Rachiminoff/Webnovel-Extractor",
+
+        video:
+            "https://www.youtube.com/embed/Zclw7GV7w7I",
+
+        oneliner:
+            "Automated pipeline for extracting and cleaning web novel content.",
+
+        description:
+            "Built to parse inconsistent site structures, clean malformed HTML, and generate readable chapter outputs at scale using Python automation tools.",
+
+        features: [
+            "Dynamic content scraping",
+            "Malformed HTML cleanup",
+            "Automated extraction workflow",
+            "Readable text formatting"
+        ],
+
+        tech: [
+            "Python",
+            "Playwright",
+            "BeautifulSoup"
+        ]
+    },
+
+    {
+        title: "FREE FREE FREE",
+        role: "Co-Developer",
+        roleClass: "co",
+        featured: true,
+        link: "https://github.com/Rachiminoff/FREEFREEFREE",
+
+        video:
+            "https://www.youtube.com/embed/CAeP5QStOrE?si=M8axOWtdfKER_7OF",
+
+        oneliner:
+            "Psychological desktop simulation game set inside a fictional 2005 OS.",
+
+        description:
+            "Players investigate a fake GTA IV leak that installs a self-aware quarantine program, gradually turning the computer itself into part of the narrative experience.",
+
+        features: [
+            "Narrative-driven gameplay",
+            "Interactive desktop simulation",
+            "Custom 3D assets",
+            "Atmospheric systems"
+        ],
+
+        tech: [
+            "Godot",
+            "GDScript",
+            "Blender"
+        ]
+    },
+
+    {
+        title: "Wais Wallet",
+        role: "Co-Developer",
+        roleClass: "co",
+        featured: false,
+        link: "https://github.com/Rachiminoff/Wais_Wallet",
+
+        images: [wais00, wais01, wais02, wais03],
+
+        oneliner:
+            "Collaborative finance and wallet management platform.",
+
+        description:
+            "Focused on responsive UI, reusable frontend architecture, and intuitive financial workflows with a clean and accessible user experience.",
+
+        features: [
+            "Responsive UI system",
+            "Reusable React components",
+            "Frontend architecture",
+            "User-centered workflows"
+        ],
+
+        tech: [
+            "TypeScript",
+            "React",
+            "Frontend"
+        ]
+    }
+];
+
 function Project() {
 
     return (
         <div className="projects-container" id="projects">
 
-            <h1>Personal Projects</h1>
+            <h1>Featured Projects</h1>
 
             <div className="projects-grid">
 
-                {/* ================= UNIQUEST ================= */}
-                <div className="project">
+                {projects.map((project, index) => (
 
-                    <ImageSlider
-                        images={[uniq01, uniq02, uniq03]}
-                        link="https://github.com/Skabeez/UniQuest"
-                        title="UniQuest"
-                    />
-
-                    <a
-                        href="https://github.com/Skabeez/UniQuest"
-                        target="_blank"
-                        rel="noreferrer"
+                    <div
+                        key={index}
+                        className={`project ${project.featured ? "featured" : ""}`}
                     >
-                        <h2>UniQuest</h2>
-                    </a>
 
-                    <div className="project-links">
-                        <a
-                            href="https://github.com/Skabeez/UniQuest"
-                            target="_blank"
-                            rel="noreferrer"
-                            className="github-link"
-                        >
-                            <GitHubIcon />
-                            <span>GitHub</span>
-                        </a>
+                        {/* ================= MEDIA ================= */}
+
+                        <div className="project-media">
+
+                            {project.images ? (
+
+                                <ImageSlider
+                                    images={project.images}
+                                    link={project.link}
+                                    title={project.title}
+                                />
+
+                            ) : (
+
+                                <div className="video-container">
+
+                                    <iframe
+                                        width="100%"
+                                        height="100%"
+                                        src={project.video}
+                                        title={project.title}
+                                        frameBorder="0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                        allowFullScreen
+                                    ></iframe>
+
+                                </div>
+
+                            )}
+
+                        </div>
+
+                        {/* ================= CONTENT ================= */}
+
+                        <div className="project-content">
+
+                            <div className="project-header">
+
+                                <a
+                                    href={project.link}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                >
+                                    <h2>{project.title}</h2>
+                                </a>
+
+                                <span className={`role-badge ${project.roleClass}`}>
+                                    {project.role}
+                                </span>
+
+                            </div>
+
+                            {/* ONE LINER */}
+
+                            <p className="project-oneliner">
+                                {project.oneliner}
+                            </p>
+
+                            {/* DESCRIPTION */}
+
+                            <p className="project-description">
+                                {project.description}
+                            </p>
+
+                            {/* FEATURES */}
+
+                            <div className="project-section">
+
+                                <h3>Key Features</h3>
+
+                                <ul className="feature-list">
+
+                                    {project.features.map((feature, i) => (
+                                        <li key={i}>
+                                            {feature}
+                                        </li>
+                                    ))}
+
+                                </ul>
+
+                            </div>
+
+                            {/* TECH STACK */}
+
+                            <div className="project-section">
+
+                                <h3>Tech Stack</h3>
+
+                                <div className="tech-tags">
+
+                                    {project.tech.map((tech, i) => (
+                                        <span key={i}>
+                                            {tech}
+                                        </span>
+                                    ))}
+
+                                </div>
+
+                            </div>
+
+                            {/* LINKS */}
+
+                            <div className="project-links">
+
+                                <a
+                                    href={project.link}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className="github-link"
+                                >
+                                    <GitHubIcon />
+                                    <span>View Project</span>
+                                </a>
+
+                            </div>
+
+                        </div>
+
                     </div>
 
-                    <div className="tech-tags">
-                        <span>FlutterFlow</span>
-                        <span>Dart</span>
-                        <span>Supabase</span>
-                    </div>
+                ))}
 
-                    <p>
-                        Mobile productivity platform for university students featuring task
-                        tracking, gamified missions, and campus utilities. Built with
-                        FlutterFlow, Dart, and Supabase for real-time sync and cross-platform use.
-                    </p>
-
-                </div>
-
-                {/* ================= WEBNOVEL EXTRACTOR ================= */}
-                <div className="project">
-
-                    <div className="video-container">
-                        <iframe
-                            width="100%"
-                            height="300"
-                            src="https://www.youtube.com/embed/Zclw7GV7w7I"
-                            title="Webnovel Extractor Demo"
-                            frameBorder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowFullScreen
-                        ></iframe>
-                    </div>
-
-                    <a
-                        href="https://github.com/Rachiminoff/Webnovel-Extractor"
-                        target="_blank"
-                        rel="noreferrer"
-                    >
-                        <h2>Webnovel Extractor</h2>
-                    </a>
-
-                    <div className="project-links">
-                        <a
-                            href="https://github.com/Rachiminoff/Webnovel-Extractor"
-                            target="_blank"
-                            rel="noreferrer"
-                            className="github-link"
-                        >
-                            <GitHubIcon />
-                            <span>GitHub</span>
-                        </a>
-                    </div>
-
-                    <div className="tech-tags">
-                        <span>Python</span>
-                        <span>Playwright</span>
-                        <span>BeautifulSoup</span>
-                    </div>
-
-                    <p>
-                        Python tool that extracts and cleans structured web novel content,
-                        handling messy HTML and turning it into readable formatted text.
-                    </p>
-                  </div>
-
-                {/* ================= FREE FREE FREE ================= */}
-                <div className="project">
-
-                    <div className="video-container">
-                        <iframe
-                            width="100%"
-                            height="300"
-                            src="https://www.youtube.com/embed/CAeP5QStOrE?si=M8axOWtdfKER_7OF"
-                            title="FREE FREE FREE Demo"
-                            frameBorder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowFullScreen
-                        ></iframe>
-                    </div>
-
-                        <h2>FREE FREE FREE</h2>
-
-                    <div className="project-links">
-                        <a
-                            href="https://github.com/Rachiminoff/FREEFREEFREE"
-                            target="_blank"
-                            rel="noreferrer"
-                            className="github-link"
-                        >
-                            <GitHubIcon />
-                            <span>GitHub</span>
-                        </a>
-                    </div>
-
-                    <div className="tech-tags">
-                        <span>Godot</span>
-                        <span>GDScript</span>
-                        <span>Blender</span>
-                    </div>
-
-                    <p>
-                        Story-driven desktop simulation game set inside a 2005 computer environment,
-                        where a fake GTA IV leak installs a self-aware quarantine program that
-                        manipulates the player through minigames, exploration, and narrative events.
-                    </p>
-
-                </div>
-                {/* ================= WAIS WALLET ================= */}
-                <div className="project">
-
-                    <ImageSlider
-                        images={[wais01, wais02, wais03]}
-                        link="https://github.com/Rachiminoff/Wais_Wallet"
-                        title="Wais Wallet"
-                    />
-
-                    <a
-                        href="https://github.com/Rachiminoff/Wais_Wallet"
-                        target="_blank"
-                        rel="noreferrer"
-                    >
-                        <h2>Wais Wallet</h2>
-                    </a>
-
-                    <div className="project-links">
-                        <a
-                            href="https://github.com/Rachiminoff/Wais_Wallet"
-                            target="_blank"
-                            rel="noreferrer"
-                            className="github-link"
-                        >
-                            <GitHubIcon />
-                            <span>GitHub</span>
-                        </a>
-                    </div>
-
-                    <div className="tech-tags">
-                        <span>TypeScript</span>
-                        <span>React</span>
-                        <span>Frontend</span>
-                    </div>
-
-                    <p>
-                        Finance and wallet management app built with React and TypeScript,
-                        focusing on clean UI, reusable components, and user-centered design.
-                    </p>
-
-                </div>
             </div>
+
         </div>
     );
 }
