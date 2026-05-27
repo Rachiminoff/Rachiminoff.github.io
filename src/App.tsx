@@ -5,6 +5,7 @@ import {
   Expertise,
   Project,
   Navigation,
+  Contact
 } from "./components";
 import FadeIn from './components/FadeIn';
 import './index.scss';
@@ -32,6 +33,7 @@ function App() {
             <Expertise/>
             <Timeline/>
             <Project/>
+            <Contact/>
         </FadeIn>
     </div>
     );

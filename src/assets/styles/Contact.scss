@@ -1,0 +1,71 @@
+.contact_wrapper svg {
+  font-size: 1em;
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+.contact-form {
+  padding-top: 20px;
+  color: white;
+
+  .MuiOutlinedInput-root {
+    background-color: #1e1e1e;
+    color: white;
+  }
+
+  fieldset {
+    border-color: #444 !important;
+  }
+
+  .MuiOutlinedInput-notchedOutline {
+    border-color: #444 !important;
+  }
+
+  .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+    border-color: #888 !important;
+  }
+
+  .Mui-focused .MuiOutlinedInput-notchedOutline {
+    border-color: #5000ca !important;
+  }
+
+  /* ✅ FIX: actual input text visibility */
+  .MuiInputBase-input {
+    color: white !important;
+    -webkit-text-fill-color: white !important;
+    opacity: 1 !important;
+  }
+
+  input,
+  textarea {
+    color: white !important;
+  }
+
+  /* Autofill fix */
+  input:-webkit-autofill {
+    -webkit-text-fill-color: white !important;
+    box-shadow: 0 0 0px 1000px #1e1e1e inset !important;
+  }
+
+  .MuiInputLabel-root {
+    color: #aaa !important;
+  }
+
+  .MuiInputLabel-root.Mui-focused {
+    color: #5000ca !important;
+  }
+}
+
+.form-flex {
+  display: flex;
+  gap: 15px;
+  padding-bottom: 15px;
+}
+
+.form-flex .MuiFormControl-root {
+  width: 100%;
+}
+
+form {
+  width: 100% !important;
+}

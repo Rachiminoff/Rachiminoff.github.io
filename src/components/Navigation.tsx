@@ -18,8 +18,7 @@ import Toolbar from '@mui/material/Toolbar';
 import { useLocation, useNavigate } from "react-router-dom";
 
 const drawerWidth = 240;
-// Added 'Vault' as a navigation item
-const navItems = [['Expertise', 'expertise'], ['History', 'history'], ['Projects', 'projects']];
+const navItems = [['Expertise', 'expertise'], ['History', 'history'], ['Projects', 'projects'], ['Contact', 'contact']];
 
 function Navigation({ parentToChild, modeChange }: any) {
   const { mode } = parentToChild;
