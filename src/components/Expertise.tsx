@@ -24,7 +24,6 @@ const webDev = [
   { name: "HTML", icon: faHtml5 },
   { name: "CSS", icon: faCss3Alt },
   { name: "JavaScript", icon: faJs },
-  { name: "Vercel", icon: faVercel },
 ];
 
 const appDev = [
