@@ -101,16 +101,12 @@ function Vault() {
                             <h2>
 
                                 {item.pdf ? (
-
-                                    <a
-                                        href="#"
-                                        onClick={(e) => {
-                                            e.preventDefault();
-                                            openPdf(item.pdf!);
-                                        }}
-                                    >
-                                        {item.name}
-                                    </a>
+                                        <button
+                                            className="vault-link-button"
+                                            onClick={() => openPdf(item.pdf!)}
+                                        >
+                                                           {item.name}
+                                    </button>
 
                                 ) : item.link ? (
 
