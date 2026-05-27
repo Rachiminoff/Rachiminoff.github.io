@@ -22,14 +22,16 @@ function Vault() {
         fetchVaultItems();
     }, []);
 
-    // ESC key closes viewer
     useEffect(() => {
         const handleEsc = (e: KeyboardEvent) => {
             if (e.key === "Escape") closeViewer();
         };
 
         window.addEventListener("keydown", handleEsc);
-        return () => window.removeEventListener("keydown", handleEsc);
+
+        return () => {
+            window.removeEventListener("keydown", handleEsc);
+        };
     }, []);
 
     const fetchVaultItems = async () => {
@@ -41,7 +43,7 @@ function Vault() {
             .order("created_at", { ascending: false });
 
         if (error) {
-            console.error("Supabase error:", error);
+            console.error(error);
         } else {
             setVaultItems(data || []);
         }
@@ -56,7 +58,6 @@ function Vault() {
 
         let finalUrl = url;
 
-        // Convert Google Drive link → embeddable viewer
         const match = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
 
         if (match) {
@@ -76,36 +77,43 @@ function Vault() {
 
     return (
         <div className="vault-container">
+
             <h1>Vault Library</h1>
 
             {loading ? (
-                <p className="vault-loading-text">Loading vault...</p>
+                <p>Loading vault...</p>
             ) : (
                 <div className="vault-grid">
+
                     {vaultItems.map((item) => (
-                        <div key={item.id} className="vault-card">
-                            
-                            {/* LEFT COLUMN: Book Cover Wrapper */}
-                            <div className="book-cover-container">
-                                {item.image ? (
+                        <div
+                            key={item.id}
+                            className="vault-book-card"
+                        >
+
+                            {/* BOOK IMAGE */}
+
+                            <div className="vault-book-image-wrapper">
+
+                                {item.image && (
                                     <img
                                         src={item.image}
                                         alt={item.name}
-                                        className="vault-image"
+                                        className="vault-book-image"
                                     />
-                                ) : (
-                                    <div className="vault-image-placeholder">
-                                        <span>No Cover Available</span>
-                                    </div>
                                 )}
+
                             </div>
 
-                            {/* RIGHT COLUMN: Content Info Block */}
-                            <div className="book-details-box">
-                                <h2 className="book-title">
+                            {/* CONTENT */}
+
+                            <div className="vault-book-content">
+
+                                <h2>
+
                                     {item.link ? (
                                         <button
-                                            className="vault-link-button"
+                                            className="vault-book-title"
                                             onClick={() => openViewer(item.link)}
                                         >
                                             {item.name}
@@ -113,34 +121,41 @@ function Vault() {
                                     ) : (
                                         item.name
                                     )}
+
                                 </h2>
 
-                                <p className="book-description">
-                                    {item.description || "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa elit lectus enim id euismod."}
+                                <p className="vault-book-description">
+                                    {item.description}
                                 </p>
 
-                                <div className="vault-type">
-                                    {item.type || "Novel-History-Love"}
+                                <div className="vault-book-tags">
+                                    <span>{item.type}</span>
                                 </div>
 
                                 {item.link && (
-                                    <button 
-                                        className="now-read-btn"
+                                    <button
+                                        className="vault-read-btn"
                                         onClick={() => openViewer(item.link)}
                                     >
-                                        Now Read!
+                                        Read Now
                                     </button>
                                 )}
-                            </div>
 
+                            </div>
                         </div>
                     ))}
+
                 </div>
             )}
 
-            {/* ---------------- PDF / Document Viewer ---------------- */}
+            {/* PDF VIEWER */}
+
             {viewerUrl && (
-                <div className="pdf-viewer" onClick={closeViewer}>
+                <div
+                    className="pdf-viewer"
+                    onClick={closeViewer}
+                >
+
                     <button
                         className="close-btn"
                         onClick={(e) => {
@@ -148,7 +163,7 @@ function Vault() {
                             closeViewer();
                         }}
                     >
-                        &times;
+                        ×
                     </button>
 
                     {viewerLoading && (
@@ -163,8 +178,10 @@ function Vault() {
                         onLoad={() => setViewerLoading(false)}
                         onClick={(e) => e.stopPropagation()}
                     />
+
                 </div>
             )}
+
         </div>
     );
 }
