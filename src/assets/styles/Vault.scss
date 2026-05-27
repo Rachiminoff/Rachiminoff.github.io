@@ -9,21 +9,9 @@
     color: #e0e0e0;
 }
 
-.vault-link-button {
-    background: none;
-    border: none;
-    padding: 0;
-    margin: 0;
-    color: inherit;
-    font: inherit;
-    cursor: pointer;
-    text-align: left;
-    font-weight: bold;
-}
-
-.vault-link-button:hover {
-    text-decoration: underline;
-}
+/* -----------------------------
+   GRID + CARDS
+------------------------------ */
 
 .vault-grid {
     display: grid;
@@ -32,33 +20,38 @@
 }
 
 .vault-card {
-    background-color: #2b2b2b; // dark card
-    border-radius: 10px;
+    background-color: #2b2b2b;
+    border-radius: 12px;
     padding: 20px;
     box-shadow: 0 3px 10px rgba(0,0,0,0.5);
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
     display: flex;
     flex-direction: column;
 }
 
 .vault-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.7);
+    transform: translateY(-6px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.7);
 }
 
 .vault-card img {
     width: 100%;
-    border-radius: 5px;
+    border-radius: 8px;
     margin-bottom: 15px;
     object-fit: cover;
 }
 
 .vault-type {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     font-weight: 600;
-    color: #9c27b0;
+    color: #b46cff;
     text-transform: uppercase;
-    margin-bottom: 5px;
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+}
+
+.vault-card h2 {
+    margin: 0;
 }
 
 .vault-card h2 a {
@@ -71,50 +64,112 @@
     color: #ffeb3b;
 }
 
-.tech-tags {
-    margin-top: 10px;
+/* clickable title button */
+.vault-link-button {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    color: #f5f5f5;
+    font: inherit;
+    cursor: pointer;
+    text-align: left;
+    font-weight: 700;
 }
 
-.tech-tags span {
-    display: inline-block;
-    background-color: #9c27b0;
-    color: white;
-    font-size: 0.7rem;
-    padding: 2px 6px;
-    margin-right: 4px;
-    border-radius: 3px;
+.vault-link-button:hover {
+    text-decoration: underline;
 }
+
+/* -----------------------------
+   PDF / DOCUMENT VIEWER (UPGRADED)
+------------------------------ */
 
 .pdf-viewer {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.9);
+    inset: 0;
+    background: rgba(10, 10, 10, 0.75);
+    backdrop-filter: blur(10px);
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 9999;
+    animation: fadeIn 0.2s ease-out;
 }
 
+/* document frame */
 .pdf-viewer iframe {
-    width: 80%;
+    width: 85%;
     height: 90%;
-    border-radius: 8px;
-    background: #fff;
+    border: none;
+    border-radius: 14px;
+    background: #ffffff;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.7);
+    animation: scaleIn 0.25s ease-out;
 }
 
+/* floating close button */
 .pdf-viewer .close-btn {
-    position: absolute;
-    top: 20px;
-    right: 30px;
-    font-size: 2rem;
-    color: #fff;
-    background: none;
+    position: fixed;
+    top: 18px;
+    right: 24px;
+
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+
     border: none;
+    font-size: 22px;
     cursor: pointer;
+
+    color: white;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(8px);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: 0.2s ease;
 }
+
+.pdf-viewer .close-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.08);
+}
+
+/* subtle inner glow for focus */
+.pdf-viewer::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    box-shadow: inset 0 0 150px rgba(156, 39, 176, 0.12);
+}
+
+/* -----------------------------
+   ANIMATIONS
+------------------------------ */
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0.96);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* -----------------------------
+   MOBILE
+------------------------------ */
 
 @media screen and (max-width: 700px) {
     .vault-container {
@@ -123,5 +178,11 @@
 
     .vault-grid {
         grid-template-columns: 1fr;
+    }
+
+    .pdf-viewer iframe {
+        width: 95%;
+        height: 92%;
+        border-radius: 10px;
     }
 }
