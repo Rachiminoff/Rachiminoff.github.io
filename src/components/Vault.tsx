@@ -12,6 +12,7 @@ interface VaultItem {
 }
 
 function Vault() {
+
     const [vaultItems, setVaultItems] = useState<VaultItem[]>([]);
     const [loading, setLoading] = useState(true);
 
@@ -23,8 +24,11 @@ function Vault() {
     }, []);
 
     useEffect(() => {
+
         const handleEsc = (e: KeyboardEvent) => {
-            if (e.key === "Escape") closeViewer();
+            if (e.key === "Escape") {
+                closeViewer();
+            }
         };
 
         window.addEventListener("keydown", handleEsc);
@@ -32,9 +36,11 @@ function Vault() {
         return () => {
             window.removeEventListener("keydown", handleEsc);
         };
+
     }, []);
 
     const fetchVaultItems = async () => {
+
         setLoading(true);
 
         const { data, error } = await supabase
@@ -52,55 +58,71 @@ function Vault() {
     };
 
     const openViewer = (url?: string) => {
+
         if (!url) return;
 
         setViewerLoading(true);
 
         let finalUrl = url;
 
+        // GOOGLE DRIVE EMBED SUPPORT
+
         const match = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
 
         if (match) {
+
             const fileId = match[1];
-            finalUrl = `https://drive.google.com/file/d/${fileId}/preview`;
+
+            finalUrl =
+                `https://drive.google.com/file/d/${fileId}/preview`;
         }
 
         setViewerUrl(finalUrl);
+
         document.body.style.overflow = "hidden";
     };
 
     const closeViewer = () => {
+
         setViewerUrl(null);
         setViewerLoading(false);
+
         document.body.style.overflow = "";
     };
 
     return (
+
         <div className="vault-container">
 
             <h1>Vault Library</h1>
 
             {loading ? (
+
                 <p>Loading vault...</p>
+
             ) : (
+
                 <div className="vault-grid">
 
                     {vaultItems.map((item) => (
+
                         <div
                             key={item.id}
                             className="vault-book-card"
                         >
 
-                            {/* BOOK IMAGE */}
+                            {/* IMAGE */}
 
                             <div className="vault-book-image-wrapper">
 
                                 {item.image && (
+
                                     <img
                                         src={item.image}
                                         alt={item.name}
                                         className="vault-book-image"
                                     />
+
                                 )}
 
                             </div>
@@ -112,12 +134,14 @@ function Vault() {
                                 <h2>
 
                                     {item.link ? (
+
                                         <button
                                             className="vault-book-title"
                                             onClick={() => openViewer(item.link)}
                                         >
                                             {item.name}
                                         </button>
+
                                     ) : (
                                         item.name
                                     )}
@@ -133,53 +157,108 @@ function Vault() {
                                 </div>
 
                                 {item.link && (
+
                                     <button
                                         className="vault-read-btn"
                                         onClick={() => openViewer(item.link)}
                                     >
                                         Read Now
                                     </button>
+
                                 )}
 
                             </div>
+
                         </div>
+
                     ))}
 
                 </div>
+
             )}
 
-            {/* PDF VIEWER */}
+            {/* ========================================
+                PDF VIEWER
+            ======================================== */}
 
             {viewerUrl && (
+
                 <div
                     className="pdf-viewer"
                     onClick={closeViewer}
                 >
 
-                    <button
-                        className="close-btn"
-                        onClick={(e) => {
-                            e.stopPropagation();
-                            closeViewer();
-                        }}
-                    >
-                        ×
-                    </button>
-
-                    {viewerLoading && (
-                        <div className="viewer-loading">
-                            Loading document...
-                        </div>
-                    )}
-
-                    <iframe
-                        src={viewerUrl}
-                        title="Vault Viewer"
-                        onLoad={() => setViewerLoading(false)}
+                    <div
+                        className="pdf-window"
                         onClick={(e) => e.stopPropagation()}
-                    />
+                    >
+
+                        {/* TOP BAR */}
+
+                        <div className="pdf-window-topbar">
+
+                            <div className="window-left">
+
+                                <div className="window-controls">
+
+                                    <span className="red"></span>
+                                    <span className="yellow"></span>
+                                    <span className="green"></span>
+
+                                </div>
+
+                                <div className="window-title">
+                                    Vault Document Viewer
+                                </div>
+
+                            </div>
+
+                            <div className="window-actions">
+
+                                <button
+                                    className="window-btn"
+                                    onClick={() =>
+                                        window.open(viewerUrl, "_blank")
+                                    }
+                                >
+                                    Open New Tab
+                                </button>
+
+                                <button
+                                    className="window-close"
+                                    onClick={closeViewer}
+                                >
+                                    ×
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                        {/* PDF FRAME */}
+
+                        <div className="pdf-frame-wrapper">
+
+                            {viewerLoading && (
+
+                                <div className="viewer-loading">
+                                    Loading document...
+                                </div>
+
+                            )}
+
+                            <iframe
+                                src={viewerUrl}
+                                title="Vault Viewer"
+                                onLoad={() => setViewerLoading(false)}
+                            />
+
+                        </div>
+
+                    </div>
 
                 </div>
+
             )}
 
         </div>
