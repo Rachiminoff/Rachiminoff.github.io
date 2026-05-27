@@ -17,12 +17,13 @@ import {
 import Chip from "@mui/material/Chip";
 import "../assets/styles/Expertise.scss";
 
-// Helper wrapper for chip items
+
 const webDev = [
   { name: "React", icon: faReact },
   { name: "HTML", icon: faHtml5 },
   { name: "CSS", icon: faCss3Alt },
   { name: "JavaScript", icon: faJs },
+  { name: "Vercel", icon: faVercel },
 ];
 
 const appDev = [
