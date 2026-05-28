@@ -54,14 +54,13 @@ function Expertise() {
           <div className="skill">
             <FontAwesomeIcon icon={faCode} size="3x" />
             <h3>Product Engineering</h3>
-            <p>
-              Building responsive web, mobile, and interactive applications with a strong focus on
-              clean UI systems, maintainable architecture, and smooth user experience across devices.
-              I prioritize component-based design, performance optimization, and scalable frontend
-              structure that can grow with product requirements. This includes translating ideas into
-              functional interfaces, integrating APIs, and ensuring consistency between design and implementation
-              across platforms.
-            </p>
+              <p>
+                Building responsive web, mobile, and interactive applications with a focus on clean design, maintainable systems, and smooth user experience across devices. I enjoy turning ideas into functional interfaces, integrating APIs, and creating scalable frontend structures that remain consistent and adaptable as projects grow.
+              </p>
+
+              <p>
+                I especially enjoy the iterative side of development—testing, debugging, refining, and gradually seeing features come together into something polished and reliable. The most rewarding part for me is reaching the point where a project feels complete and ready to be shared with others.
+              </p>
 
             <div className="flex-chips">
               <span className="chip-title">Stack:</span>
@@ -96,14 +95,13 @@ function Expertise() {
           <div className="skill">
             <FontAwesomeIcon icon={faCode} size="3x" />
             <h3>Automation & Systems</h3>
-            <p>
-              Developing scripts and internal tools that automate repetitive workflows, streamline
-              data processing, and improve system efficiency. I focus on practical automation using
-              Python and modern tooling—handling tasks like web scraping, data extraction, content processing,
-              and workflow orchestration. The goal is to build lightweight and reliable systems that reduce
-              manual effort and improve consistency in both structured and unstructured environments.
-            </p>
+                <p>
+                Developing scripts and internal tools that automate repetitive workflows, streamline data processing, and improve overall efficiency. I enjoy building practical automation systems using Python and modern tooling for tasks such as web scraping, data extraction, content processing, and workflow management.
+              </p>
 
+              <p>
+                My focus is on creating lightweight and reliable solutions that reduce manual effort while keeping systems organized, consistent, and easy to maintain across different types of workflows and environments.
+              </p>
             <div className="flex-chips">
               <span className="chip-title">Stack:</span>
               {scripting.map((item, index) => (

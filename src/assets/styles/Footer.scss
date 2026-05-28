@@ -94,7 +94,7 @@
     }
   }
 
-  /* ================= ADMIN CARD ================= */
+  /* ================= ADMIN ================= */
 
   .admin-card {
     border-color: rgba(255, 80, 80, 0.8);
@@ -140,7 +140,7 @@
   position: fixed;
   inset: 0;
 
-  background: rgba(0,0,0,0.75);
+  background: rgba(0,0,0,0.78);
 
   display: flex;
   align-items: center;
@@ -148,16 +148,14 @@
 
   z-index: 9999;
 
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(12px);
 
-  padding: 20px;
+  padding: 24px;
 }
 
 .admin-modal {
-  width: min(1100px, 100%);
-  max-height: 92vh;
-
-  overflow-y: auto;
+  width: min(1450px, 100%);
+  height: min(92vh, 1000px);
 
   background: #0d1325;
 
@@ -165,28 +163,17 @@
 
   border-radius: 28px;
 
-  padding: 40px 32px;
+  padding: 28px;
 
   position: relative;
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  overflow: hidden;
 
   box-shadow:
     0 0 40px rgba(0,0,0,0.6),
     0 0 120px rgba(0,0,0,0.4);
 
   animation: modalFade 0.25s ease;
-}
-
-.admin-modal::-webkit-scrollbar {
-  width: 8px;
-}
-
-.admin-modal::-webkit-scrollbar-thumb {
-  background: rgba(255,255,255,0.15);
-  border-radius: 999px;
 }
 
 @keyframes modalFade {
@@ -227,6 +214,8 @@
 
   transition: 0.2s ease;
 
+  z-index: 50;
+
   &:hover {
     color: white;
     transform: rotate(90deg);
@@ -261,6 +250,7 @@
 
 .admin-modal input {
   width: 100%;
+  max-width: 420px;
 
   padding: 16px 18px;
 
@@ -288,6 +278,7 @@
 
 .submit-btn {
   width: 100%;
+  max-width: 420px;
 
   padding: 16px;
 
@@ -313,179 +304,291 @@
 
 .art-viewer {
   width: 100%;
+  height: 100%;
 
+  display: grid;
+  grid-template-columns: 300px 1fr;
+
+  gap: 24px;
+}
+
+/* ================= SIDEBAR ================= */
+
+.art-sidebar {
+  height: 100%;
+
+  overflow-y: auto;
+
+  padding-right: 4px;
+}
+
+.art-sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.art-sidebar::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.12);
+  border-radius: 999px;
+}
+
+.art-list {
   display: flex;
   flex-direction: column;
-  align-items: center;
-
-  gap: 22px;
+  gap: 12px;
 }
 
-.art-counter {
-  font-size: 0.85rem;
-  letter-spacing: 1px;
-  color: rgba(255,255,255,0.55);
-}
-
-.art-image-wrapper {
-  position: relative;
-
+.art-item {
   width: 100%;
 
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 14px;
+
+  padding: 12px;
+
+  border-radius: 16px;
+
+  border: 1px solid transparent;
+
+  background: rgba(255,255,255,0.03);
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+
+  text-align: left;
+
+  &:hover {
+    background: rgba(255,255,255,0.06);
+  }
+
+  &.active {
+    border-color: rgba(77,163,255,0.5);
+
+    background: rgba(77,163,255,0.08);
+
+    box-shadow:
+      0 0 0 1px rgba(77,163,255,0.12);
+  }
+
+  img {
+    width: 64px;
+    height: 64px;
+
+    object-fit: cover;
+
+    border-radius: 12px;
+
+    flex-shrink: 0;
+  }
 }
 
-.art-image {
-  width: 100%;
-  max-height: 72vh;
+.art-meta {
+  min-width: 0;
 
-  object-fit: contain;
+  h4 {
+    margin: 0;
 
-  border-radius: 22px;
+    font-size: 0.95rem;
+    font-weight: 600;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  p {
+    margin: 5px 0 0;
+
+    font-size: 0.78rem;
+
+    color: rgba(255,255,255,0.5);
+  }
+}
+
+/* ================= MAIN ================= */
+
+.art-main {
+  display: flex;
+  flex-direction: column;
+
+  gap: 18px;
+
+  min-width: 0;
+}
+
+/* ================= TOOLBAR ================= */
+
+.viewer-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding: 16px 20px;
+
+  border-radius: 18px;
 
   background: rgba(255,255,255,0.03);
 
   border: 1px solid rgba(255,255,255,0.08);
-
-  box-shadow:
-    0 10px 40px rgba(0,0,0,0.45),
-    0 0 0 1px rgba(255,255,255,0.03);
-
-  transition: 0.25s ease;
 }
 
-/* ================= ARROWS ================= */
+.viewer-title {
+  min-width: 0;
 
-.nav-arrow {
-  position: absolute;
-  top: 50%;
+  h3 {
+    margin: 0;
 
-  transform: translateY(-50%);
+    font-size: 1rem;
 
-  width: 52px;
-  height: 52px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 
-  border-radius: 50%;
-  border: none;
+  p {
+    margin-top: 4px;
 
-  cursor: pointer;
+    font-size: 0.8rem;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  font-size: 2rem;
-  font-weight: 300;
-
-  color: white;
-
-  background: rgba(0,0,0,0.45);
-
-  backdrop-filter: blur(10px);
-
-  transition: 0.2s ease;
-
-  z-index: 5;
-
-  &:hover {
-    transform: translateY(-50%) scale(1.08);
-    background: rgba(255,255,255,0.12);
+    color: rgba(255,255,255,0.55);
   }
 }
 
-.nav-arrow.left {
-  left: 18px;
+/* ================= CONTROLS ================= */
+
+.viewer-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  flex-wrap: wrap;
 }
 
-.nav-arrow.right {
-  right: 18px;
-}
+.viewer-controls button {
+  height: 40px;
+  min-width: 40px;
 
-/* ================= TITLE ================= */
+  padding: 0 14px;
 
-.art-info {
-  text-align: center;
-}
+  border-radius: 12px;
 
-.art-title {
-  font-size: 1rem;
-  font-weight: 500;
+  border: 1px solid rgba(255,255,255,0.08);
+
+  background: rgba(255,255,255,0.04);
+
   color: white;
-  letter-spacing: 0.5px;
+
+  font-size: 0.95rem;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+
+  &:hover {
+    background: rgba(255,255,255,0.1);
+    transform: translateY(-1px);
+  }
 }
 
-/* ================= THUMBNAILS ================= */
+.zoom-label {
+  min-width: 60px;
 
-.art-thumbnails {
-  width: 100%;
+  text-align: center;
+
+  font-size: 0.9rem;
+
+  color: rgba(255,255,255,0.75);
+}
+
+/* ================= CANVAS ================= */
+
+.viewer-canvas {
+  flex: 1;
+
+  overflow: auto;
 
   display: flex;
-  gap: 12px;
+  align-items: flex-start;
+  justify-content: center;
 
-  overflow-x: auto;
+  padding: 40px;
 
-  padding-bottom: 6px;
+  border-radius: 22px;
+
+  border: 1px solid rgba(255,255,255,0.08);
+
+  background:
+    linear-gradient(
+      45deg,
+      rgba(255,255,255,0.03) 25%,
+      transparent 25%
+    ),
+    linear-gradient(
+      -45deg,
+      rgba(255,255,255,0.03) 25%,
+      transparent 25%
+    ),
+    linear-gradient(
+      45deg,
+      transparent 75%,
+      rgba(255,255,255,0.03) 75%
+    ),
+    linear-gradient(
+      -45deg,
+      transparent 75%,
+      rgba(255,255,255,0.03) 75%
+    );
+
+  background-size: 24px 24px;
+
+  background-position:
+    0 0,
+    0 12px,
+    12px -12px,
+    -12px 0px;
 }
 
-.art-thumbnails::-webkit-scrollbar {
-  height: 6px;
+.viewer-canvas::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
 }
 
-.art-thumbnails::-webkit-scrollbar-thumb {
-  background: rgba(255,255,255,0.15);
+.viewer-canvas::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.14);
   border-radius: 999px;
 }
 
-.thumb {
-  min-width: 84px;
-  width: 84px;
-  height: 84px;
+/* ================= IMAGE ================= */
 
-  border: 2px solid transparent;
-  border-radius: 14px;
+.viewer-canvas img {
+  max-width: none;
 
-  overflow: hidden;
+  border-radius: 18px;
 
-  padding: 0;
+  box-shadow:
+    0 20px 60px rgba(0,0,0,0.5),
+    0 0 0 1px rgba(255,255,255,0.05);
 
-  cursor: pointer;
-
-  background: transparent;
-
-  opacity: 0.5;
-
-  transition: 0.2s ease;
-
-  flex-shrink: 0;
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  &:hover {
-    opacity: 0.9;
-    transform: translateY(-2px);
-  }
-
-  &.active {
-    opacity: 1;
-
-    border-color: #4da3ff;
-
-    box-shadow:
-      0 0 0 3px rgba(77,163,255,0.18);
-  }
+  transition: transform 0.18s ease;
 }
 
 /* ================= EMPTY ================= */
 
 .empty-gallery {
-  color: rgba(255,255,255,0.65);
-  padding: 40px 0;
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: rgba(255,255,255,0.55);
+
+  font-size: 1rem;
 }
 
 /* ================= MOBILE ================= */
@@ -543,24 +646,29 @@
   }
 
   .admin-modal {
-    padding: 28px 18px;
-    border-radius: 22px;
+    padding: 20px;
+    height: 94vh;
   }
 
-  .art-image {
-    max-height: 55vh;
+  .art-viewer {
+    grid-template-columns: 1fr;
   }
 
-  .nav-arrow {
-    width: 42px;
-    height: 42px;
-
-    font-size: 1.7rem;
+  .art-sidebar {
+    height: 180px;
   }
 
-  .thumb {
-    min-width: 68px;
-    width: 68px;
-    height: 68px;
+  .viewer-toolbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .viewer-canvas {
+    min-height: 420px;
+    padding: 20px;
+  }
+
+  .viewer-controls {
+    width: 100%;
   }
 }
