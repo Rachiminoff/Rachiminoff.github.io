@@ -54,7 +54,7 @@ function Footer() {
     }
   };
 
-  // ================= VIEWER =================
+  // ================= NAVIGATION =================
 
   const nextArt = () => {
     setIndex((prev) => (prev + 1) % arts.length);
@@ -66,12 +66,14 @@ function Footer() {
     setZoom(1);
   };
 
+  // ================= ZOOM =================
+
   const zoomIn = () => {
-    setZoom((prev) => Math.min(prev + 0.2, 4));
+    setZoom((prev) => Math.min(prev + 0.2, 5));
   };
 
   const zoomOut = () => {
-    setZoom((prev) => Math.max(prev - 0.2, 0.6));
+    setZoom((prev) => Math.max(prev - 0.2, 0.5));
   };
 
   const resetZoom = () => {
@@ -175,7 +177,7 @@ function Footer() {
       {showModal && (
         <div className="admin-modal-overlay">
 
-          <div className="admin-modal">
+          <div className={`admin-modal ${unlocked ? "viewer-open" : "locked"}`}>
 
             {/* CLOSE */}
 
@@ -186,7 +188,7 @@ function Footer() {
               <CloseIcon />
             </button>
 
-            {/* ================= LOCK SCREEN ================= */}
+            {/* ================= LOGIN ================= */}
 
             {!unlocked ? (
               <>
@@ -301,17 +303,21 @@ function Footer() {
 
                       </div>
 
-                      {/* IMAGE */}
+                      {/* IMAGE VIEWER */}
 
                       <div className="viewer-canvas">
 
-                        <img
-                          src={arts[index].image_url}
-                          alt={arts[index].title}
-                          style={{
-                            transform: `scale(${zoom})`
-                          }}
-                        />
+                        <div className="viewer-inner">
+
+                          <img
+                            src={arts[index].image_url}
+                            alt={arts[index].title}
+                            style={{
+                              transform: `scale(${zoom})`
+                            }}
+                          />
+
+                        </div>
 
                       </div>
 

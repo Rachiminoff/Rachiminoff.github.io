@@ -1,3 +1,5 @@
+/* ================= FOOTER ================= */
+
 .footer {
   width: 100%;
   padding: 80px 8%;
@@ -11,8 +13,6 @@
     max-width: 1300px;
     margin: auto;
   }
-
-  /* ================= LOGO ================= */
 
   .footer-logo {
     img {
@@ -29,8 +29,6 @@
     }
   }
 
-  /* ================= CONTENT ================= */
-
   .footer-content {
     flex: 1;
 
@@ -41,15 +39,11 @@
     }
   }
 
-  /* ================= GRID ================= */
-
   .footer-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(260px, 1fr));
     gap: 24px;
   }
-
-  /* ================= CARD ================= */
 
   .footer-card {
     display: flex;
@@ -70,16 +64,10 @@
 
     cursor: pointer;
 
-    backdrop-filter: blur(12px);
-
     &:hover {
       transform: translateY(-4px);
 
       background: rgba(255,255,255,0.06);
-
-      box-shadow:
-        0 0 25px rgba(255,255,255,0.08),
-        0 0 60px rgba(255,255,255,0.03);
     }
 
     svg {
@@ -94,21 +82,13 @@
     }
   }
 
-  /* ================= ADMIN ================= */
-
   .admin-card {
     border-color: rgba(255, 80, 80, 0.8);
 
     &:hover {
       background: rgba(255, 50, 50, 0.08);
-
-      box-shadow:
-        0 0 25px rgba(255,0,0,0.2),
-        0 0 80px rgba(255,0,0,0.08);
     }
   }
-
-  /* ================= COPYRIGHT ================= */
 
   .footer-bottom {
     display: flex;
@@ -154,16 +134,11 @@
 }
 
 .admin-modal {
-  width: min(1450px, 100%);
-  height: min(92vh, 1000px);
-
   background: #0d1325;
 
   border: 1px solid rgba(255,255,255,0.08);
 
   border-radius: 28px;
-
-  padding: 28px;
 
   position: relative;
 
@@ -174,6 +149,28 @@
     0 0 120px rgba(0,0,0,0.4);
 
   animation: modalFade 0.25s ease;
+}
+
+/* PASSWORD MODAL */
+
+.admin-modal.locked {
+  width: 420px;
+  max-width: 90%;
+
+  padding: 42px 32px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* VIEWER MODAL */
+
+.admin-modal.viewer-open {
+  width: min(1450px, 100%);
+  height: min(92vh, 950px);
+
+  padding: 28px;
 }
 
 @keyframes modalFade {
@@ -250,7 +247,6 @@
 
 .admin-modal input {
   width: 100%;
-  max-width: 420px;
 
   padding: 16px 18px;
 
@@ -272,13 +268,11 @@
 
   &:focus {
     border-color: rgba(255,255,255,0.4);
-    background: rgba(255,255,255,0.05);
   }
 }
 
 .submit-btn {
   width: 100%;
-  max-width: 420px;
 
   padding: 16px;
 
@@ -364,11 +358,7 @@
 
   &.active {
     border-color: rgba(77,163,255,0.5);
-
     background: rgba(77,163,255,0.08);
-
-    box-shadow:
-      0 0 0 1px rgba(77,163,255,0.12);
   }
 
   img {
@@ -415,6 +405,8 @@
   gap: 18px;
 
   min-width: 0;
+
+  height: 100%;
 }
 
 /* ================= TOOLBAR ================= */
@@ -436,16 +428,9 @@
 }
 
 .viewer-title {
-  min-width: 0;
-
   h3 {
     margin: 0;
-
     font-size: 1rem;
-
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
   }
 
   p {
@@ -481,16 +466,12 @@
 
   color: white;
 
-  font-size: 0.95rem;
-  font-weight: 500;
-
   cursor: pointer;
 
   transition: 0.2s ease;
 
   &:hover {
     background: rgba(255,255,255,0.1);
-    transform: translateY(-1px);
   }
 }
 
@@ -504,18 +485,12 @@
   color: rgba(255,255,255,0.75);
 }
 
-/* ================= CANVAS ================= */
+/* ================= VIEWER ================= */
 
 .viewer-canvas {
   flex: 1;
 
   overflow: auto;
-
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-
-  padding: 40px;
 
   border-radius: 22px;
 
@@ -544,12 +519,34 @@
     );
 
   background-size: 24px 24px;
+}
 
-  background-position:
-    0 0,
-    0 12px,
-    12px -12px,
-    -12px 0px;
+.viewer-inner {
+  width: fit-content;
+  min-width: 100%;
+  min-height: 100%;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+
+  padding: 40px;
+}
+
+.viewer-canvas img {
+  display: block;
+
+  max-width: none;
+
+  border-radius: 18px;
+
+  box-shadow:
+    0 20px 60px rgba(0,0,0,0.5),
+    0 0 0 1px rgba(255,255,255,0.05);
+
+  transform-origin: top center;
+
+  transition: transform 0.18s ease;
 }
 
 .viewer-canvas::-webkit-scrollbar {
@@ -560,20 +557,6 @@
 .viewer-canvas::-webkit-scrollbar-thumb {
   background: rgba(255,255,255,0.14);
   border-radius: 999px;
-}
-
-/* ================= IMAGE ================= */
-
-.viewer-canvas img {
-  max-width: none;
-
-  border-radius: 18px;
-
-  box-shadow:
-    0 20px 60px rgba(0,0,0,0.5),
-    0 0 0 1px rgba(255,255,255,0.05);
-
-  transition: transform 0.18s ease;
 }
 
 /* ================= EMPTY ================= */
@@ -587,8 +570,6 @@
   justify-content: center;
 
   color: rgba(255,255,255,0.55);
-
-  font-size: 1rem;
 }
 
 /* ================= MOBILE ================= */
@@ -630,23 +611,10 @@
         font-size: 1.4rem !important;
       }
     }
-
-    .footer-bottom {
-      justify-content: center;
-      margin-top: 50px;
-
-      h3 {
-        font-size: 1.2rem;
-      }
-
-      .copyright-icon {
-        font-size: 2.5rem;
-      }
-    }
   }
 
-  .admin-modal {
-    padding: 20px;
+  .admin-modal.viewer-open {
+    padding: 16px;
     height: 94vh;
   }
 
@@ -665,10 +633,9 @@
 
   .viewer-canvas {
     min-height: 420px;
-    padding: 20px;
   }
 
-  .viewer-controls {
-    width: 100%;
+  .viewer-inner {
+    padding: 20px;
   }
 }
