@@ -153,7 +153,7 @@ function Footer() {
                 onClick={() => setShowModal(true)}
               >
                 <LockIcon />
-                <span>LOCK: ADMIN ACCESS ONLY</span>
+                <span>ADMIN ACCESS ONLY</span>
               </button>
 
             </div>
