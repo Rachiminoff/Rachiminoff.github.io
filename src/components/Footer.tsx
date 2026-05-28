@@ -18,7 +18,6 @@ type Art = {
 };
 
 function Footer() {
-
   const [showModal, setShowModal] = useState(false);
   const [passcode, setPasscode] = useState("");
 
@@ -29,7 +28,9 @@ function Footer() {
 
   const [zoom, setZoom] = useState(1);
 
-  // ================= FETCH =================
+  // =========================================================
+  // FETCH
+  // =========================================================
 
   const fetchArts = async () => {
     const { data, error } = await supabase
@@ -43,18 +44,23 @@ function Footer() {
     }
   };
 
-  // ================= LOGIN =================
+  // =========================================================
+  // LOGIN
+  // =========================================================
 
   const handleSubmit = async () => {
     if (passcode === "sining") {
       setUnlocked(true);
+
       await fetchArts();
     } else {
       alert("Incorrect Passcode");
     }
   };
 
-  // ================= NAVIGATION =================
+  // =========================================================
+  // NAVIGATION
+  // =========================================================
 
   const nextArt = () => {
     setIndex((prev) => (prev + 1) % arts.length);
@@ -66,33 +72,34 @@ function Footer() {
     setZoom(1);
   };
 
-  // ================= ZOOM =================
+  // =========================================================
+  // ZOOM
+  // =========================================================
 
   const zoomIn = () => {
     setZoom((prev) => Math.min(prev + 0.2, 5));
   };
 
   const zoomOut = () => {
-    setZoom((prev) => Math.max(prev - 0.2, 0.5));
+    setZoom((prev) => Math.max(prev - 0.2, 0.4));
   };
 
-  const resetZoom = () => {
-    setZoom(1);
-  };
-
-  // ================= CLOSE =================
+  // =========================================================
+  // CLOSE
+  // =========================================================
 
   const closeModal = () => {
     setShowModal(false);
+
     setUnlocked(false);
+
     setPasscode("");
+
     setZoom(1);
   };
 
   return (
     <>
-      {/* ================= FOOTER ================= */}
-
       <footer className="footer">
 
         <div className="footer-container">
@@ -172,12 +179,14 @@ function Footer() {
 
       </footer>
 
-      {/* ================= MODAL ================= */}
+      {/* =========================================================
+          MODAL
+      ========================================================= */}
 
       {showModal && (
         <div className="admin-modal-overlay">
 
-          <div className={`admin-modal ${unlocked ? "viewer-open" : "locked"}`}>
+          <div className={`admin-modal ${unlocked ? "" : "locked"}`}>
 
             {/* CLOSE */}
 
@@ -188,11 +197,12 @@ function Footer() {
               <CloseIcon />
             </button>
 
-            {/* ================= LOGIN ================= */}
+            {/* =========================================================
+                LOCK SCREEN
+            ========================================================= */}
 
             {!unlocked ? (
               <>
-
                 <LockIcon className="modal-lock" />
 
                 <h2>Admin Access</h2>
@@ -214,110 +224,147 @@ function Footer() {
                 >
                   Unlock
                 </button>
-
               </>
             ) : (
               <>
-                {/* ================= ART VIEWER ================= */}
+                {/* =========================================================
+                    TOPBAR
+                ========================================================= */}
 
-                {arts.length > 0 ? (
+                <div className="viewer-topbar">
 
-                  <div className="art-viewer">
+                  <div className="viewer-left">
 
-                    {/* ================= SIDEBAR ================= */}
+                    <div className="viewer-controls-mac">
+                      <span className="red"></span>
+                      <span className="yellow"></span>
+                      <span className="green"></span>
+                    </div>
 
-                    <div className="art-sidebar">
+                    <div className="viewer-file-title">
+                      {arts[index]?.title}
+                    </div>
 
-                      <div className="art-list">
+                  </div>
 
-                        {arts.map((art, i) => (
-                          <button
-                            key={art.id}
-                            className={`art-item ${i === index ? "active" : ""}`}
-                            onClick={() => {
-                              setIndex(i);
-                              setZoom(1);
-                            }}
-                          >
+                  <div className="viewer-actions">
 
-                            <img
-                              src={art.image_url}
-                              alt={art.title}
-                            />
+                    <button
+                      className="viewer-btn"
+                      onClick={zoomOut}
+                    >
+                      Zoom Out
+                    </button>
 
-                            <div className="art-meta">
-                              <h4>{art.title}</h4>
-                              <p>Artwork #{i + 1}</p>
-                            </div>
+                    <div className="zoom-label">
+                      {Math.round(zoom * 100)}%
+                    </div>
 
-                          </button>
-                        ))}
+                    <button
+                      className="viewer-btn"
+                      onClick={zoomIn}
+                    >
+                      Zoom In
+                    </button>
+
+                  </div>
+
+                </div>
+
+                {/* =========================================================
+                    VIEWER
+                ========================================================= */}
+
+                <div className="art-viewer">
+
+                  {/* SIDEBAR */}
+
+                  <div className="art-sidebar">
+
+                    <div className="art-list">
+
+                      {arts.map((art, i) => (
+                        <button
+                          key={art.id}
+                          className={`art-item ${
+                            i === index ? "active" : ""
+                          }`}
+                          onClick={() => {
+                            setIndex(i);
+                            setZoom(1);
+                          }}
+                        >
+
+                          <img
+                            src={art.image_url}
+                            alt={art.title}
+                          />
+
+                          <div className="art-meta">
+                            <h4>{art.title}</h4>
+                            <p>Artwork #{i + 1}</p>
+                          </div>
+
+                        </button>
+                      ))}
+
+                    </div>
+
+                  </div>
+
+                  {/* MAIN */}
+
+                  <div className="art-main">
+
+                    {/* TOOLBAR */}
+
+                    <div className="viewer-toolbar">
+
+                      <div className="viewer-toolbar-left">
+
+                        <button
+                          className="viewer-btn"
+                          onClick={prevArt}
+                        >
+                          ← Previous
+                        </button>
+
+                        <button
+                          className="viewer-btn"
+                          onClick={nextArt}
+                        >
+                          Next →
+                        </button>
+
+                      </div>
+
+                      <div className="viewer-toolbar-right">
+
+                        <div className="toolbar-page">
+                          {index + 1} / {arts.length}
+                        </div>
 
                       </div>
 
                     </div>
 
-                    {/* ================= MAIN VIEWER ================= */}
+                    {/* PDF STYLE CANVAS */}
 
-                    <div className="art-main">
+                    <div className="viewer-canvas">
 
-                      {/* TOOLBAR */}
+                      <div className="viewer-inner">
 
-                      <div className="viewer-toolbar">
-
-                        <div className="viewer-title">
-                          <h3>{arts[index].title}</h3>
-
-                          <p>
-                            {index + 1} / {arts.length}
-                          </p>
-                        </div>
-
-                        <div className="viewer-controls">
-
-                          <button onClick={prevArt}>
-                            ←
-                          </button>
-
-                          <button onClick={nextArt}>
-                            →
-                          </button>
-
-                          <button onClick={zoomOut}>
-                            −
-                          </button>
-
-                          <div className="zoom-label">
-                            {Math.round(zoom * 100)}%
-                          </div>
-
-                          <button onClick={zoomIn}>
-                            +
-                          </button>
-
-                          <button onClick={resetZoom}>
-                            Reset
-                          </button>
-
-                        </div>
-
-                      </div>
-
-                      {/* IMAGE VIEWER */}
-
-                      <div className="viewer-canvas">
-
-                        <div className="viewer-inner">
-
+                        {arts.length > 0 && (
                           <img
                             src={arts[index].image_url}
                             alt={arts[index].title}
+                            className="viewer-image"
+                            draggable={false}
                             style={{
                               transform: `scale(${zoom})`
                             }}
                           />
-
-                        </div>
+                        )}
 
                       </div>
 
@@ -325,12 +372,7 @@ function Footer() {
 
                   </div>
 
-                ) : (
-                  <div className="empty-gallery">
-                    No artworks found.
-                  </div>
-                )}
-
+                </div>
               </>
             )}
 
