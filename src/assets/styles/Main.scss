@@ -2,6 +2,24 @@
     background-color: rgba(0, 0, 0, 0.2);
 }
 
+.icon-btn {
+  background: transparent !important;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: inherit;
+}
+
+.icon-btn:hover {
+  background: transparent !important;
+}
+
 .about-section {
     display: flex;
     gap: 30px;

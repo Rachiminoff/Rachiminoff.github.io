@@ -1,24 +1,28 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import '../assets/styles/Contact.scss';
 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import SendIcon from '@mui/icons-material/Send';
 import TextField from '@mui/material/TextField';
 import Alert from '@mui/material/Alert';
+import Paper from '@mui/material/Paper';
+
+import SendIcon from '@mui/icons-material/Send';
 
 import emailjs from '@emailjs/browser';
 
 function Contact() {
-  const form = useRef<HTMLFormElement | null>(null);
-
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [subject, setSubject] = useState('');
   const [message, setMessage] = useState('');
 
-  const [nameError, setNameError] = useState(false);
-  const [emailError, setEmailError] = useState(false);
-  const [messageError, setMessageError] = useState(false);
+  const [error, setError] = useState({
+    name: false,
+    email: false,
+    subject: false,
+    message: false,
+  });
 
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -26,36 +30,21 @@ function Contact() {
   const validateEmail = (value: string) =>
     /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 
-  const resetErrors = () => {
-    setNameError(false);
-    setEmailError(false);
-    setMessageError(false);
-  };
-
   const sendEmail = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    resetErrors();
     setSuccess(false);
 
-    let hasError = false;
+    const newError = {
+      name: !name.trim(),
+      email: !email.trim() || !validateEmail(email),
+      subject: !subject.trim(),
+      message: !message.trim(),
+    };
 
-    if (!name.trim()) {
-      setNameError(true);
-      hasError = true;
-    }
+    setError(newError);
 
-    if (!email.trim() || !validateEmail(email)) {
-      setEmailError(true);
-      hasError = true;
-    }
-
-    if (!message.trim()) {
-      setMessageError(true);
-      hasError = true;
-    }
-
-    if (hasError) return;
+    if (Object.values(newError).some(Boolean)) return;
 
     try {
       setLoading(true);
@@ -63,91 +52,95 @@ function Contact() {
       await emailjs.send(
         'service_6uk51ch',
         'template_45wei9l',
-        { name, email, message },
+        {
+          name,
+          email,
+          subject,
+          message,
+        },
         'GJD7pIhFsXAEGwQpV'
       );
 
       setSuccess(true);
+
       setName('');
       setEmail('');
+      setSubject('');
       setMessage('');
-    } catch (error) {
-      console.error('FAILED...', error);
+    } catch (err) {
+      console.error('EmailJS failed:', err);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div id="contact">
-      <div className="items-container">
-        <div className="contact_wrapper">
-          <h1>Contact Me</h1>
+    <div id="contact" className="contact-container">
+      <h2>Contact</h2>
 
-          <p>
-            Got a project waiting to be realized? Let&apos;s collaborate and make it happen!
-          </p>
+      <Paper className="contact-card" elevation={0}>
+        <h3>Send Message</h3>
 
-          {success && (
-            <Alert severity="success" sx={{ mb: 2 }}>
-              Message sent successfully!
-            </Alert>
-          )}
+        {success && (
+          <Alert severity="success" sx={{ mb: 2 }}>
+            Message sent successfully
+          </Alert>
+        )}
 
-          <Box
-            ref={form}
-            component="form"
-            noValidate
-            autoComplete="off"
-            className="contact-form"
-            onSubmit={sendEmail}
-          >
-            <div className="form-flex">
-              <TextField
-                fullWidth
-                label="Your Name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                error={nameError}
-                helperText={nameError ? "Please enter your name" : ""}
-                InputLabelProps={{ shrink: true }}
-              />
-
-              <TextField
-                fullWidth
-                label="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                error={emailError}
-                helperText={emailError ? "Enter a valid email" : ""}
-                InputLabelProps={{ shrink: true }}
-              />
-            </div>
-
+        <Box
+          component="form"
+          onSubmit={sendEmail}
+          className="contact-form"
+        >
+          <div className="form-grid-2">
             <TextField
+              label="Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              error={error.name}
               fullWidth
-              label="Message"
-              multiline
-              rows={8}
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              error={messageError}
-              helperText={messageError ? "Please enter your message" : ""}
-              InputLabelProps={{ shrink: true }}
             />
 
-            <Button
-              type="submit"
-              variant="contained"
-              endIcon={<SendIcon />}
-              disabled={loading}
-              sx={{ mt: 2, float: "right" }}
-            >
-              {loading ? "Sending..." : "Send Message"}
-            </Button>
-          </Box>
-        </div>
-      </div>
+            <TextField
+              label="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              error={error.email}
+              fullWidth
+            />
+          </div>
+
+          <TextField
+            label="Subject"
+            value={subject}
+            onChange={(e) => setSubject(e.target.value)}
+            error={error.subject}
+            fullWidth
+            sx={{ mt: 2 }}
+          />
+
+          <TextField
+            label="Message"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            error={error.message}
+            multiline
+            rows={8}
+            fullWidth
+            sx={{ mt: 2 }}
+          />
+
+          <Button
+            type="submit"
+            variant="contained"
+            endIcon={<SendIcon />}
+            disabled={loading}
+            className="send-button"
+          >
+            {loading ? 'Sending...' : 'Send'}
+          </Button>
+        </Box>
+      </Paper>
     </div>
   );
 }

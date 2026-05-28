@@ -50,14 +50,17 @@ function Expertise() {
 
         <div className="skills-grid">
 
-          {/* Web Dev */}
+          {/* Product Engineering */}
           <div className="skill">
             <FontAwesomeIcon icon={faCode} size="3x" />
-            <h3>Web Development</h3>
+            <h3>Product Engineering</h3>
             <p>
-              Building responsive and component-driven web applications with a focus on
-              clean UI structure, reusable architecture, and seamless API integration.
-              Emphasis is placed on performance, scalability, and maintainable frontend design.
+              Building responsive web, mobile, and interactive applications with a strong focus on
+              clean UI systems, maintainable architecture, and smooth user experience across devices.
+              I prioritize component-based design, performance optimization, and scalable frontend
+              structure that can grow with product requirements. This includes translating ideas into
+              functional interfaces, integrating APIs, and ensuring consistency between design and implementation
+              across platforms.
             </p>
 
             <div className="flex-chips">
@@ -70,24 +73,17 @@ function Expertise() {
                   icon={<FontAwesomeIcon icon={item.icon} />}
                 />
               ))}
-            </div>
-          </div>
-
-          {/* App Dev */}
-          <div className="skill">
-            <FontAwesomeIcon icon={faMobileAlt} size="3x" />
-            <h3>Mobile & App Development</h3>
-            <p>
-              Developing cross-platform mobile applications with attention to intuitive UI flows,
-              responsive layouts, and rapid prototyping. Focused on building functional apps
-              that translate ideas into usable product experiences.
-            </p>
-
-            <div className="flex-chips">
-              <span className="chip-title">Stack:</span>
               {appDev.map((item, index) => (
                 <Chip
-                  key={index}
+                  key={`app-${index}`}
+                  className="chip"
+                  label={item.name}
+                  icon={<FontAwesomeIcon icon={item.icon} />}
+                />
+              ))}
+              {gameDev.map((item, index) => (
+                <Chip
+                  key={`game-${index}`}
                   className="chip"
                   label={item.name}
                   icon={<FontAwesomeIcon icon={item.icon} />}
@@ -96,42 +92,21 @@ function Expertise() {
             </div>
           </div>
 
-          {/* Scripting */}
+          {/* Automation & Systems */}
           <div className="skill">
             <FontAwesomeIcon icon={faCode} size="3x" />
-            <h3>Scripting & Automation</h3>
+            <h3>Automation & Systems</h3>
             <p>
-              Writing Python-based automation tools for data extraction, web scraping,
-              and content processing. These scripts streamline repetitive workflows
-              and handle both structured and messy datasets efficiently.
+              Developing scripts and internal tools that automate repetitive workflows, streamline
+              data processing, and improve system efficiency. I focus on practical automation using
+              Python and modern tooling—handling tasks like web scraping, data extraction, content processing,
+              and workflow orchestration. The goal is to build lightweight and reliable systems that reduce
+              manual effort and improve consistency in both structured and unstructured environments.
             </p>
 
             <div className="flex-chips">
               <span className="chip-title">Stack:</span>
               {scripting.map((item, index) => (
-                <Chip
-                  key={index}
-                  className="chip"
-                  label={item.name}
-                  icon={<FontAwesomeIcon icon={item.icon} />}
-                />
-              ))}
-            </div>
-          </div>
-
-          {/* Game Dev */}
-          <div className="skill">
-            <FontAwesomeIcon icon={faGamepad} size="3x" />
-            <h3>Game Development</h3>
-            <p>
-              Creating small-scale games and narrative-driven visual novels with an emphasis on
-              gameplay logic, branching story structures, and interactive systems.
-              Focused on blending storytelling with functional game mechanics.
-            </p>
-
-            <div className="flex-chips">
-              <span className="chip-title">Tools:</span>
-              {gameDev.map((item, index) => (
                 <Chip
                   key={index}
                   className="chip"

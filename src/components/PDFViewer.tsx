@@ -9,7 +9,6 @@ interface PDFViewerProps {
 function PDFViewer({ url, onClose }: PDFViewerProps) {
     const [viewerLoading, setViewerLoading] = useState(true);
 
-    // ✅ FIXED: proper scroll lock + reliable restore
     useEffect(() => {
         if (!url) return;
 
@@ -53,7 +52,7 @@ function PDFViewer({ url, onClose }: PDFViewerProps) {
                         </div>
 
                         <div className="window-title">
-                            Vault Document Viewer
+                             Document Viewer
                         </div>
                     </div>
 
