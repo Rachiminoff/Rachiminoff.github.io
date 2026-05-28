@@ -166,7 +166,7 @@ const projects = [
         features: [
             "Narrative-driven gameplay",
             "Interactive desktop simulation",
-            "Custom 3D assets",
+            "2D and 3D gameplay",
             "Atmospheric systems"
         ],
 
