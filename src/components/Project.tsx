@@ -167,7 +167,7 @@ const projects = [
             "Narrative-driven gameplay",
             "Interactive desktop simulation",
             "2D and 3D gameplay",
-            "Atmospheric systems"
+            "Atmospheric systems",
             "AI-driven enemy behavior"
         ],
 
