@@ -3,6 +3,8 @@
 
     overflow: hidden;
 
+    min-height: 100vh;
+
     padding: 4rem 6%;
 
     color: #f4f0ff;
@@ -17,10 +19,19 @@
             circle at bottom right,
             rgba(255, 120, 200, 0.08),
             transparent 40%
+        ),
+        linear-gradient(
+            to bottom,
+            #12071d,
+            #0f0817
         );
+
+    animation: vaultAmbient 18s ease infinite;
 }
 
-/* subtle grain texture */
+/* ========================================
+   GRAIN TEXTURE
+======================================== */
 
 .vault-container::after {
     content: "";
@@ -36,8 +47,42 @@
         url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cg fill='white'%3E%3Ccircle cx='2' cy='2' r='1'/%3E%3C/g%3E%3C/svg%3E");
 }
 
-.vault-container h1 {
+/* ========================================
+   FLOATING DUST
+======================================== */
+
+.vault-container::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    pointer-events: none;
+
+    opacity: 0.22;
+
+    background-image:
+        radial-gradient(
+            circle,
+            rgba(255,255,255,0.08) 1px,
+            transparent 1px
+        );
+
+    background-size: 120px 120px;
+
+    animation: dustFloat 35s linear infinite;
+}
+
+/* ========================================
+   HEADER
+======================================== */
+
+.vault-header {
     margin-bottom: 3rem;
+}
+
+.vault-container h1 {
+    margin-bottom: 1rem;
 
     font-size: clamp(2.2rem, 4vw, 3.3rem);
 
@@ -51,6 +96,102 @@
         0 4px 20px rgba(0,0,0,0.4);
 }
 
+.vault-intro {
+    max-width: 620px;
+}
+
+.vault-intro p {
+    color: rgba(255,255,255,0.62);
+
+    line-height: 1.8;
+
+    font-size: 1rem;
+}
+
+/* ========================================
+   LOADING
+======================================== */
+
+.vault-loading {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.vault-loading-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(290px, 1fr));
+
+    gap: 2rem;
+}
+
+.vault-loading-text {
+    text-align: center;
+
+    color: rgba(255,255,255,0.55);
+
+    letter-spacing: 0.08em;
+
+    text-transform: uppercase;
+
+    font-size: 0.8rem;
+}
+
+.vault-skeleton-card {
+    height: 520px;
+
+    border-radius: 22px;
+
+    padding: 2rem;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,0.05),
+            rgba(255,255,255,0.02)
+        );
+
+    border:
+        1px solid rgba(255,255,255,0.05);
+
+    animation: skeletonPulse 1.8s ease infinite;
+}
+
+.vault-skeleton-image {
+    width: 200px;
+    height: 280px;
+
+    margin: 0 auto 2rem;
+
+    border-radius: 10px;
+
+    background:
+        rgba(255,255,255,0.06);
+}
+
+.vault-skeleton-line {
+    height: 14px;
+
+    margin-bottom: 1rem;
+
+    border-radius: 999px;
+
+    background:
+        rgba(255,255,255,0.06);
+}
+
+.vault-skeleton-line.short {
+    width: 60%;
+
+    margin-inline: auto;
+}
+
+/* ========================================
+   GRID
+======================================== */
+
 .vault-grid {
     display: grid;
 
@@ -59,6 +200,10 @@
 
     gap: 2rem;
 }
+
+/* ========================================
+   CARD
+======================================== */
 
 .vault-book-card {
     position: relative;
@@ -70,7 +215,7 @@
 
     min-height: 100%;
 
-    border-radius: 22px;
+    border-radius: 24px;
 
     background:
         linear-gradient(
@@ -90,8 +235,32 @@
         0 0 40px rgba(120,80,255,0.12);
 
     transition:
-        transform 0.28s ease,
-        box-shadow 0.28s ease;
+        transform 0.32s ease,
+        box-shadow 0.32s ease,
+        border 0.32s ease;
+
+    transform-style: preserve-3d;
+}
+
+/* top accent line */
+
+.vault-book-card::after {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 4px;
+
+    background:
+        linear-gradient(
+            to right,
+            #f2d2ff,
+            #8f6cff
+        );
 }
 
 /* reflective sweep */
@@ -123,17 +292,93 @@
 
 .vault-book-card:hover {
     transform:
-        translateY(-8px)
+        perspective(1200px)
+        translateY(-10px)
         rotateX(2deg)
         rotateY(-2deg);
 
+    border:
+        1px solid rgba(255,255,255,0.12);
+
     box-shadow:
-        0 24px 48px rgba(0,0,0,0.45),
-        0 0 60px rgba(140,90,255,0.18);
+        0 28px 56px rgba(0,0,0,0.48),
+        0 0 70px rgba(140,90,255,0.22);
 }
+
+/* ========================================
+   NEW ENTRY BADGE
+======================================== */
+
+.vault-new-badge {
+    position: absolute;
+
+    top: 1rem;
+    right: 1rem;
+
+    z-index: 4;
+
+    padding: 0.45rem 0.8rem;
+
+    border-radius: 999px;
+
+    background:
+        rgba(255,255,255,0.12);
+
+    border:
+        1px solid rgba(255,255,255,0.1);
+
+    backdrop-filter: blur(10px);
+
+    color: white;
+
+    font-size: 0.7rem;
+
+    font-weight: 700;
+
+    letter-spacing: 0.08em;
+
+    text-transform: uppercase;
+}
+
+/* ========================================
+   CARD GLOW
+======================================== */
+
+.vault-card-glow {
+    position: absolute;
+
+    inset: auto -20% -30% -20%;
+
+    height: 220px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(140,90,255,0.24),
+            transparent 70%
+        );
+
+    filter: blur(60px);
+
+    z-index: 0;
+
+    opacity: 0.7;
+
+    transition: opacity 0.3s ease;
+}
+
+.vault-book-card:hover .vault-card-glow {
+    opacity: 1;
+}
+
+/* ========================================
+   IMAGE
+======================================== */
 
 .vault-book-image-wrapper {
     position: relative;
+
+    z-index: 1;
 
     width: 100%;
 
@@ -162,27 +407,32 @@
         contrast(1.04)
         saturate(1.05);
 
-    transform: rotate(-5deg);
+    transform:
+        perspective(1200px)
+        rotateY(-8deg)
+        rotateZ(-5deg);
 
     box-shadow:
         15px 20px 34px rgba(0,0,0,0.45);
 
     transition:
-        transform 0.28s ease,
-        box-shadow 0.28s ease;
+        transform 0.32s ease,
+        box-shadow 0.32s ease;
 }
 
 .vault-book-card:hover .vault-book-image {
     transform:
-        rotate(-2deg)
-        scale(1.035)
+        perspective(1200px)
+        rotateY(-4deg)
+        rotateZ(-2deg)
+        scale(1.04)
         translateY(-2px);
 
     box-shadow:
         18px 24px 42px rgba(0,0,0,0.52);
 }
 
-/* fake book spine */
+/* fake spine */
 
 .vault-book-image-wrapper::after {
     content: "";
@@ -210,7 +460,45 @@
     z-index: -1;
 }
 
+/* placeholder */
+
+.vault-image-placeholder {
+    width: 220px;
+    aspect-ratio: 3 / 4.4;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,0.06),
+            rgba(255,255,255,0.02)
+        );
+
+    border:
+        1px solid rgba(255,255,255,0.08);
+
+    color:
+        rgba(255,255,255,0.35);
+
+    letter-spacing: 0.12em;
+
+    font-size: 0.8rem;
+}
+
+/* ========================================
+   CONTENT
+======================================== */
+
 .vault-book-content {
+    position: relative;
+
+    z-index: 2;
+
     display: flex;
     flex-direction: column;
 
@@ -219,6 +507,28 @@
     padding: 1.6rem 2rem 2rem;
 
     text-align: center;
+
+    transition: transform 0.3s ease;
+}
+
+.vault-book-card:hover .vault-book-content {
+    transform: translateY(-2px);
+}
+
+.vault-id {
+    display: inline-block;
+
+    margin-bottom: 0.9rem;
+
+    color: rgba(255,255,255,0.45);
+
+    font-size: 0.72rem;
+
+    font-weight: 700;
+
+    letter-spacing: 0.14em;
+
+    text-transform: uppercase;
 }
 
 .vault-book-content h2 {
@@ -258,6 +568,27 @@
     transform: scale(1.01);
 }
 
+/* meta */
+
+.vault-meta-row {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 0.5rem;
+
+    margin-bottom: 1rem;
+
+    color: rgba(255,255,255,0.5);
+
+    font-size: 0.82rem;
+
+    letter-spacing: 0.04em;
+
+    flex-wrap: wrap;
+}
+
 .vault-book-description {
     flex: 1;
 
@@ -268,10 +599,26 @@
     line-height: 1.72;
 
     font-size: 0.96rem;
+
+    transition: color 0.3s ease;
 }
+
+.vault-book-card:hover .vault-book-description {
+    color: rgba(255,255,255,0.86);
+}
+
+/* ========================================
+   TAGS
+======================================== */
 
 .vault-book-tags {
     margin-bottom: 1.5rem;
+
+    transition: transform 0.3s ease;
+}
+
+.vault-book-card:hover .vault-book-tags {
+    transform: translateY(-1px);
 }
 
 .vault-book-tags span {
@@ -300,6 +647,10 @@
     text-transform: uppercase;
 }
 
+/* ========================================
+   BUTTON
+======================================== */
+
 .vault-read-btn {
     border:
         1px solid rgba(255,255,255,0.14);
@@ -323,7 +674,8 @@
     transition:
         background 0.25s ease,
         transform 0.25s ease,
-        border 0.25s ease;
+        border 0.25s ease,
+        box-shadow 0.25s ease;
 }
 
 .vault-read-btn:hover {
@@ -335,6 +687,9 @@
 
     transform:
         translateY(-2px);
+
+    box-shadow:
+        0 10px 24px rgba(0,0,0,0.22);
 }
 
 /* ========================================
@@ -426,15 +781,15 @@
     flex-shrink: 0;
 }
 
-/* LEFT */
+/* ========================================
+   VIEWER TOPBAR
+======================================== */
 
 .window-left {
     display: flex;
     align-items: center;
     gap: 0.8rem;
 }
-
-/* traffic buttons */
 
 .window-controls {
     display: flex;
@@ -460,8 +815,6 @@
     background: #28c840;
 }
 
-/* title */
-
 .window-title {
     color: rgba(255,255,255,0.88);
 
@@ -475,8 +828,6 @@
 
     max-width: 320px;
 }
-
-/* actions */
 
 .window-actions {
     display: flex;
@@ -509,8 +860,6 @@
     background:
         rgba(255,255,255,0.12);
 }
-
-/* close */
 
 .window-close {
     width: 38px;
@@ -597,6 +946,44 @@
     }
 }
 
+@keyframes dustFloat {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-120px);
+    }
+}
+
+@keyframes vaultAmbient {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes skeletonPulse {
+    0% {
+        opacity: 0.5;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.5;
+    }
+}
+
 /* ========================================
    TABLET
 ======================================== */
@@ -636,7 +1023,14 @@
     .vault-book-image {
         max-width: 180px;
 
-        transform: rotate(-3deg);
+        transform:
+            perspective(1200px)
+            rotateY(-5deg)
+            rotateZ(-3deg);
+    }
+
+    .vault-image-placeholder {
+        width: 180px;
     }
 
     .vault-book-content {
