@@ -527,6 +527,9 @@
   overflow: hidden;
 
   background: #2b2b2b;
+
+  display: flex;
+  flex-direction: column;
 }
 
 /* =========================================================
@@ -586,12 +589,7 @@
 ========================================================= */
 
 .viewer-canvas {
-  position: absolute;
-
-  top: 56px;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  flex: 1;
 
   overflow: auto;
 
@@ -602,6 +600,10 @@
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
+
+  -webkit-overflow-scrolling: touch;
+
+  touch-action: pan-x pan-y pinch-zoom;
 }
 
 .viewer-canvas:active {
@@ -820,35 +822,202 @@
     }
   }
 
+  /* =========================================================
+     MODAL
+  ========================================================= */
+
+  .admin-modal-overlay {
+    padding: 0;
+  }
+
   .admin-modal {
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100dvh;
 
     border-radius: 0;
   }
 
+  /* =========================================================
+     VIEWER LAYOUT
+  ========================================================= */
+
   .art-viewer {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
+
+    height: 100%;
   }
 
-  .art-sidebar {
-    height: 180px;
+  /* =========================================================
+     TOPBAR
+  ========================================================= */
 
-    border-right: none;
-
-    border-bottom:
-      1px solid rgba(255,255,255,0.06);
+  .viewer-topbar {
+    min-height: 54px;
+    padding: 0 0.75rem;
   }
 
   .viewer-file-title {
     max-width: 120px;
+    font-size: 0.82rem;
   }
 
   .viewer-btn {
     display: none;
   }
 
+  /* =========================================================
+     SIDEBAR
+  ========================================================= */
+
+  .art-sidebar {
+    order: 2;
+
+    height: 110px;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    border-right: none;
+
+    border-top:
+      1px solid rgba(255,255,255,0.06);
+
+    border-bottom: none;
+
+    padding: 0.75rem;
+  }
+
+  .art-list {
+    flex-direction: row;
+    gap: 0.75rem;
+
+    width: max-content;
+  }
+
+  .art-item {
+    flex-direction: column;
+
+    width: 88px;
+    min-width: 88px;
+
+    padding: 0.5rem;
+
+    gap: 0.5rem;
+
+    text-align: center;
+
+    img {
+      width: 64px;
+      height: 64px;
+    }
+  }
+
+  .art-meta {
+    width: 100%;
+
+    h4 {
+      font-size: 0.72rem;
+
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    p {
+      display: none;
+    }
+  }
+
+  /* =========================================================
+     MAIN
+  ========================================================= */
+
+  .art-main {
+    flex: 1;
+
+    min-height: 0;
+  }
+
+  /* =========================================================
+     TOOLBAR
+  ========================================================= */
+
+  .viewer-toolbar {
+    height: 48px;
+
+    padding: 0 0.75rem;
+
+    flex-shrink: 0;
+  }
+
+  .viewer-toolbar-left,
+  .viewer-toolbar-right {
+    gap: 0.4rem;
+  }
+
+  .zoom-label,
+  .toolbar-page {
+    font-size: 0.78rem;
+  }
+
+  /* =========================================================
+     CANVAS
+  ========================================================= */
+
+  .viewer-canvas {
+    flex: 1;
+
+    overflow: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 1rem;
+
+    touch-action: pan-x pan-y pinch-zoom;
+  }
+
   .viewer-inner {
-    padding: 1.5rem;
+    min-width: auto;
+    min-height: auto;
+
+    padding: 0;
+
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* =========================================================
+     IMAGE
+  ========================================================= */
+
+  .viewer-image {
+    max-width: 100%;
+    height: auto;
+
+    object-fit: contain;
+
+    border-radius: 10px;
+
+    transform-origin: center center;
+  }
+
+  /* =========================================================
+     CLOSE BUTTON
+  ========================================================= */
+
+  .close-btn {
+    top: 10px;
+    right: 10px;
+
+    width: 42px;
+    height: 42px;
+
+    z-index: 999;
   }
 }
