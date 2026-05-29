@@ -114,8 +114,7 @@ function Vault() {
                 <div className="vault-intro">
 
                     <p>
-                        Personal archive of preserved works,
-                        unfinished fragments, and completed
+                        Personal archive of preserved works and completed
                         creations.
                     </p>
 
