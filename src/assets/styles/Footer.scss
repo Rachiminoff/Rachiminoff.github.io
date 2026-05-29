@@ -774,65 +774,49 @@
 }
 
 /* =========================================================
-   MOBILE
+   MOBILE IMAGE VIEWER OPTIMIZATION
 ========================================================= */
 
 @media screen and (max-width: 950px) {
 
-  .footer {
-    padding: 40px 5%;
+  /* =========================
+     MODAL
+  ========================= */
 
-    .footer-container {
-      flex-direction: column;
-
-      align-items: center;
-
-      gap: 30px;
-    }
-
-    .footer-logo img {
-      width: 140px;
-      height: 140px;
-    }
-
-    .footer-content {
-      width: 100%;
-
-      h2 {
-        text-align: center;
-      }
-    }
-
-    .footer-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .footer-card {
-      padding: 18px;
-    }
-
-    .footer-bottom {
-      justify-content: center;
-
-      text-align: center;
-
-      margin-top: 50px;
-    }
+  .admin-modal-overlay {
+    padding: 0;
   }
 
   .admin-modal {
     width: 100%;
-    height: 100%;
+    height: 100dvh;
 
     border-radius: 0;
   }
 
+  /* =========================
+     VIEWER LAYOUT
+  ========================= */
+
   .art-viewer {
     grid-template-columns: 1fr;
+
+    grid-template-rows: auto 1fr;
+
+    height: 100%;
   }
 
+  /* =========================
+     SIDEBAR
+  ========================= */
+
   .art-sidebar {
-    height: 180px;
+    height: 105px;
+
+    padding: 0.7rem;
+
+    overflow-x: auto;
+    overflow-y: hidden;
 
     border-right: none;
 
@@ -840,15 +824,170 @@
       1px solid rgba(255,255,255,0.06);
   }
 
+  .art-list {
+    flex-direction: row;
+
+    gap: 0.7rem;
+
+    width: max-content;
+  }
+
+  .art-item {
+    min-width: 88px;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    text-align: center;
+
+    gap: 0.45rem;
+
+    padding: 0.55rem;
+  }
+
+  .art-item img {
+    width: 54px;
+    height: 54px;
+  }
+
+  .art-meta {
+
+    h4 {
+      font-size: 0.7rem;
+
+      white-space: nowrap;
+
+      max-width: 72px;
+    }
+
+    p {
+      display: none;
+    }
+  }
+
+  /* =========================
+     TOPBAR
+  ========================= */
+
+  .viewer-topbar {
+    height: 48px;
+
+    padding: 0 0.75rem;
+  }
+
   .viewer-file-title {
-    max-width: 120px;
+    max-width: 110px;
+
+    font-size: 0.78rem;
+  }
+
+  .viewer-controls-mac span {
+    width: 10px;
+    height: 10px;
+  }
+
+  /* =========================
+     TOOLBAR
+  ========================= */
+
+  .viewer-toolbar {
+    height: 48px;
+
+    padding: 0 0.6rem;
+  }
+
+  .viewer-toolbar-left,
+  .viewer-toolbar-right {
+    gap: 0.45rem;
   }
 
   .viewer-btn {
-    display: none;
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-width: 38px;
+    height: 38px;
+
+    padding: 0 0.7rem;
+
+    font-size: 0.78rem;
+  }
+
+  .toolbar-page,
+  .zoom-label {
+    font-size: 0.72rem;
+  }
+
+  /* =========================
+     CANVAS
+  ========================= */
+
+  .viewer-canvas {
+    top: 48px;
+
+    justify-content: center;
+    align-items: flex-start;
+
+    overflow: auto;
+
+    -webkit-overflow-scrolling: touch;
+
+    touch-action: pan-x pan-y pinch-zoom;
   }
 
   .viewer-inner {
-    padding: 1.5rem;
+    width: 100%;
+
+    min-width: unset;
+    min-height: unset;
+
+    padding: 0.75rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  /* =========================
+     IMAGE
+  ========================= */
+
+  .viewer-image {
+    width: auto;
+
+    max-width: 100%;
+    height: auto;
+
+    object-fit: contain;
+
+    border-radius: 10px;
+
+    transform-origin: center top;
+  }
+
+  /* =========================
+     CLOSE BUTTON
+  ========================= */
+
+  .close-btn {
+    width: 42px;
+    height: 42px;
+
+    top: 10px;
+    right: 10px;
+
+    border-radius: 12px;
+  }
+
+  /* =========================
+     SCROLLBARS
+  ========================= */
+
+  .viewer-canvas::-webkit-scrollbar,
+  .art-sidebar::-webkit-scrollbar {
+    display: none;
   }
 }
