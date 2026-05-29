@@ -1,237 +1,191 @@
-:root {
-
-  /* =========================================================
-     COLORS
-  ========================================================= */
-
-  --bg:
-    #0b0714;
-
-  --bg-soft:
-    #120d1f;
-
-  --surface:
-    rgba(255,255,255,0.04);
-
-  --surface-hover:
-    rgba(255,255,255,0.08);
-
-  --border:
-    rgba(255,255,255,0.08);
-
-  --border-strong:
-    rgba(255,255,255,0.14);
-
-  --text:
-    rgba(255,255,255,0.94);
-
-  --text-soft:
-    rgba(255,255,255,0.72);
-
-  --text-faint:
-    rgba(255,255,255,0.46);
-
-  --accent:
-    #8f6cff;
-
-  --accent-soft:
-    #c89dff;
-
-  --danger:
-    #ff5f57;
-
-  /* =========================================================
-     SHADOWS
-  ========================================================= */
-
-  --shadow:
-    0 12px 36px rgba(0,0,0,0.38);
-
-  --shadow-hover:
-    0 24px 60px rgba(0,0,0,0.52);
-
-  /* =========================================================
-     RADII
-  ========================================================= */
-
-  --radius-sm: 12px;
-  --radius-md: 20px;
-  --radius-lg: 28px;
-
-  /* =========================================================
-     TRANSITION
-  ========================================================= */
-
-  --transition:
-    0.28s cubic-bezier(.2,.8,.2,1);
-}
-
-/* =========================================================
-   BASE
-========================================================= */
-
-* {
-  box-sizing: border-box;
-}
-
-img {
-  display: block;
-  max-width: 100%;
-}
-
-button,
-input {
-  font: inherit;
-}
-
-/* =========================================================
-   SCROLLBAR
-========================================================= */
-
-*::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
-}
-
-*::-webkit-scrollbar-thumb {
-  background:
-    rgba(255,255,255,0.14);
-
-  border-radius: 999px;
-}
-
-*::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-/* =========================================================
-   VAULT CONTAINER
-========================================================= */
-
 .vault-container {
-  position: relative;
+    position: relative;
 
-  overflow: hidden;
+    overflow: hidden;
 
-  min-height: 100vh;
+    min-height: 100vh;
 
-  padding: 4rem 6%;
+    padding: 4rem 6%;
 
-  color: var(--text);
+    color: #f4f0ff;
 
-  background:
-    radial-gradient(
-      circle at top,
-      rgba(143,108,255,0.16),
-      transparent 40%
-    ),
-    linear-gradient(
-      180deg,
-      #120d1f,
-      #09070f
-    );
+    animation: vaultAmbient 18s ease infinite;
 }
 
-/* =========================================================
-   GRAIN
-========================================================= */
+.vault-book-description {
+    white-space: pre-line;
+}
+
+/* ========================================
+   GRAIN TEXTURE
+======================================== */
 
 .vault-container::after {
-  content: "";
+    content: "";
 
-  position: fixed;
-  inset: 0;
+    position: fixed;
+    inset: 0;
 
-  pointer-events: none;
+    pointer-events: none;
 
-  opacity: 0.03;
+    opacity: 0.035;
 
-  background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cg fill='white'%3E%3Ccircle cx='2' cy='2' r='1'/%3E%3C/g%3E%3C/svg%3E");
+    background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cg fill='white'%3E%3Ccircle cx='2' cy='2' r='1'/%3E%3C/g%3E%3C/svg%3E");
 }
 
-/* =========================================================
+/* ========================================
    FLOATING DUST
-========================================================= */
+======================================== */
 
 .vault-container::before {
-  content: "";
+    content: "";
 
-  position: absolute;
-  inset: 0;
+    position: absolute;
+    inset: 0;
 
-  pointer-events: none;
+    pointer-events: none;
 
-  opacity: 0.16;
+    opacity: 0.22;
 
-  background-image:
-    radial-gradient(
-      circle,
-      rgba(255,255,255,0.08) 1px,
-      transparent 1px
-    );
+    background-image:
+        radial-gradient(
+            circle,
+            rgba(255,255,255,0.08) 1px,
+            transparent 1px
+        );
 
-  background-size: 120px 120px;
+    background-size: 120px 120px;
 
-  animation:
-    dustFloat 35s linear infinite;
+    animation: dustFloat 35s linear infinite;
 }
 
-/* =========================================================
+/* ========================================
    HEADER
-========================================================= */
+======================================== */
 
 .vault-header {
-  position: relative;
-
-  z-index: 3;
-
-  margin-bottom: 3rem;
+    margin-bottom: 3rem;
 }
 
 .vault-container h1 {
-  margin-bottom: 1rem;
+    margin-bottom: 1rem;
 
-  font-size:
-    clamp(2.4rem, 4vw, 3.6rem);
+    font-size: clamp(2.2rem, 4vw, 3.3rem);
 
-  font-weight: 800;
+    font-weight: 800;
 
-  letter-spacing: -0.05em;
+    letter-spacing: -0.05em;
 
-  color: white;
+    color: #ffffff;
 
-  text-shadow:
-    0 10px 30px rgba(0,0,0,0.4);
+    text-shadow:
+        0 4px 20px rgba(0,0,0,0.4);
 }
 
 .vault-intro {
-  max-width: 640px;
+    max-width: 620px;
 }
 
 .vault-intro p {
-  color: var(--text-soft);
+    color: rgba(255,255,255,0.62);
 
-  line-height: 1.8;
+    line-height: 1.8;
 
-  font-size: 1rem;
+    font-size: 1rem;
 }
 
-/* =========================================================
+/* ========================================
+   LOADING
+======================================== */
+
+.vault-loading {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.vault-loading-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(290px, 1fr));
+
+    gap: 2rem;
+}
+
+.vault-loading-text {
+    text-align: center;
+
+    color: rgba(255,255,255,0.55);
+
+    letter-spacing: 0.08em;
+
+    text-transform: uppercase;
+
+    font-size: 0.8rem;
+}
+
+.vault-skeleton-card {
+    height: 520px;
+
+    border-radius: 22px;
+
+    padding: 2rem;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,0.05),
+            rgba(255,255,255,0.02)
+        );
+
+    border:
+        1px solid rgba(255,255,255,0.05);
+
+    animation: skeletonPulse 1.8s ease infinite;
+}
+
+.vault-skeleton-image {
+    width: 200px;
+    height: 280px;
+
+    margin: 0 auto 2rem;
+
+    border-radius: 10px;
+
+    background:
+        rgba(255,255,255,0.06);
+}
+
+.vault-skeleton-line {
+    height: 14px;
+
+    margin-bottom: 1rem;
+
+    border-radius: 999px;
+
+    background:
+        rgba(255,255,255,0.06);
+}
+
+.vault-skeleton-line.short {
+    width: 60%;
+
+    margin-inline: auto;
+}
+
+/* ========================================
    GRID
-========================================================= */
+======================================== */
 
 .vault-grid {
-  position: relative;
+    display: grid;
 
-  z-index: 2;
+    grid-template-columns:
+        repeat(auto-fit, minmax(290px, 1fr));
 
-  display: grid;
-
-  grid-template-columns:
-    repeat(auto-fit, minmax(290px, 1fr));
-
-  gap: 2rem;
+    gap: 2rem;
 }
 
 /* =========================================================
@@ -241,35 +195,40 @@ input {
 .vault-book-card {
   position: relative;
 
-  isolation: isolate;
-
   overflow: hidden;
 
   display: flex;
   flex-direction: column;
 
-  border-radius: var(--radius-lg);
+  border-radius: 26px;
 
   background:
     linear-gradient(
-      160deg,
-      #5f2ed6 0%,
-      #43179b 55%,
-      #2a005e 100%
+      180deg,
+      #5d2bd1 0%,
+      #441998 55%,
+      #2b0a58 100%
     );
 
   border:
-    1px solid var(--border);
+    1px solid rgba(255,255,255,0.08);
 
   box-shadow:
-    var(--shadow);
+    0 18px 42px rgba(0,0,0,0.42);
 
   transition:
-    transform var(--transition),
-    box-shadow var(--transition),
-    border var(--transition);
+    transform 0.28s ease,
+    box-shadow 0.28s ease;
 
-  min-height: 100%;
+  isolation: isolate;
+}
+
+.vault-book-card:hover {
+  transform:
+    translateY(-6px);
+
+  box-shadow:
+    0 28px 60px rgba(0,0,0,0.5);
 }
 
 /* =========================================================
@@ -285,115 +244,40 @@ input {
   left: 0;
 
   width: 100%;
-  height: 4px;
+  height: 3px;
 
   background:
     linear-gradient(
       to right,
-      #f2d2ff,
-      #8f6cff
+      rgba(255,255,255,0.9),
+      rgba(255,255,255,0.15)
     );
 }
 
 /* =========================================================
-   HOVER GLOW
-========================================================= */
-
-.vault-book-card::before {
-  content: "";
-
-  position: absolute;
-
-  inset: auto -20% -30% -20%;
-
-  height: 240px;
-
-  background:
-    radial-gradient(
-      circle,
-      rgba(160,120,255,0.28),
-      transparent 70%
-    );
-
-  filter: blur(50px);
-
-  opacity: 0;
-
-  transition:
-    opacity 0.35s ease;
-
-  z-index: 0;
-}
-
-.vault-book-card:hover::before {
-  opacity: 1;
-}
-
-.vault-book-card:hover {
-  transform:
-    translateY(-8px)
-    scale(1.015);
-
-  border:
-    1px solid rgba(255,255,255,0.16);
-
-  box-shadow:
-    var(--shadow-hover);
-}
-
-/* =========================================================
-   BADGE
-========================================================= */
-
-.vault-new-badge {
-  position: absolute;
-
-  top: 1rem;
-  right: 1rem;
-
-  z-index: 5;
-
-  padding:
-    0.5rem 0.85rem;
-
-  border-radius: 999px;
-
-  background:
-    rgba(255,255,255,0.12);
-
-  border:
-    1px solid rgba(255,255,255,0.1);
-
-  backdrop-filter: blur(10px);
-
-  color: white;
-
-  font-size: 0.72rem;
-
-  font-weight: 700;
-
-  letter-spacing: 0.08em;
-
-  text-transform: uppercase;
-}
-
-/* =========================================================
-   IMAGE
+   IMAGE WRAPPER
 ========================================================= */
 
 .vault-book-image-wrapper {
   position: relative;
 
-  z-index: 2;
-
   display: flex;
   justify-content: center;
   align-items: center;
 
-  padding: 2rem 2rem 0;
+  padding:
+    2.5rem 2rem 0;
+
+  z-index: 2;
 }
 
+/* =========================================================
+   BOOK COVER
+========================================================= */
+
 .vault-book-image {
+  position: relative;
+
   width: 100%;
   max-width: 220px;
 
@@ -401,37 +285,39 @@ input {
 
   object-fit: cover;
 
-  border-radius: 12px;
+  border-radius: 14px;
 
   border:
     1px solid rgba(255,255,255,0.08);
 
+  background: #fff;
+
   transform:
     perspective(1200px)
-    rotateY(-5deg)
-    rotateZ(-2deg);
+    rotateY(-4deg)
+    rotateZ(-1.5deg);
 
   box-shadow:
-    16px 20px 36px rgba(0,0,0,0.45);
+    0 18px 34px rgba(0,0,0,0.38);
 
   transition:
-    transform var(--transition),
-    box-shadow var(--transition);
+    transform 0.28s ease,
+    box-shadow 0.28s ease;
 }
 
 .vault-book-card:hover .vault-book-image {
   transform:
     perspective(1200px)
-    rotateY(-3deg)
-    rotateZ(-1deg)
-    scale(1.04);
+    rotateY(-2deg)
+    rotateZ(-0.5deg)
+    scale(1.03);
 
   box-shadow:
-    18px 24px 42px rgba(0,0,0,0.52);
+    0 24px 46px rgba(0,0,0,0.46);
 }
 
 /* =========================================================
-   SPINE
+   BOOK SPINE
 ========================================================= */
 
 .vault-book-image-wrapper::after {
@@ -439,56 +325,26 @@ input {
 
   position: absolute;
 
-  right: calc(50% - 122px);
-  top: 2.5rem;
+  top: 2.7rem;
 
-  width: 10px;
-  height: calc(100% - 2.5rem);
+  right: calc(50% - 119px);
 
-  border-radius: 0 6px 6px 0;
+  width: 8px;
+  height: calc(100% - 2.7rem);
 
-  opacity: 0.7;
+  border-radius:
+    0 4px 4px 0;
 
-  background:
-    repeating-linear-gradient(
-      to bottom,
-      #f5f5f5,
-      #f5f5f5 2px,
-      #dddddd 3px
-    );
-}
-
-/* =========================================================
-   PLACEHOLDER
-========================================================= */
-
-.vault-image-placeholder {
-  width: 220px;
-
-  aspect-ratio: 3 / 4.4;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  border-radius: 12px;
+  opacity: 0.45;
 
   background:
     linear-gradient(
-      145deg,
-      rgba(255,255,255,0.06),
-      rgba(255,255,255,0.02)
+      to right,
+      rgba(255,255,255,0.7),
+      rgba(255,255,255,0.15)
     );
 
-  border:
-    1px solid rgba(255,255,255,0.08);
-
-  color:
-    rgba(255,255,255,0.36);
-
-  font-size: 0.8rem;
-
-  letter-spacing: 0.12em;
+  pointer-events: none;
 }
 
 /* =========================================================
@@ -505,33 +361,22 @@ input {
 
   flex: 1;
 
-  padding: 1.8rem 2rem 2rem;
+  padding:
+    1.8rem 2rem 2rem;
 
   text-align: center;
 }
 
-.vault-id {
-  display: inline-block;
-
-  margin-bottom: 1rem;
-
-  color: var(--text-faint);
-
-  font-size: 0.72rem;
-
-  font-weight: 700;
-
-  letter-spacing: 0.14em;
-
-  text-transform: uppercase;
-}
+/* =========================================================
+   TITLE
+========================================================= */
 
 .vault-book-content h2 {
   margin:
     0 0 1rem;
 
   font-size:
-    clamp(1.45rem, 2vw, 2rem);
+    clamp(1.45rem, 2vw, 1.9rem);
 
   line-height: 1.08;
 
@@ -542,109 +387,19 @@ input {
   color: white;
 }
 
-.vault-book-title {
-  background: none;
-  border: none;
-
-  color: inherit;
-
-  font: inherit;
-
-  cursor: pointer;
-
-  padding: 0;
-
-  transition:
-    opacity 0.2s ease,
-    transform 0.2s ease;
-}
-
-.vault-book-title:hover {
-  opacity: 0.88;
-
-  transform: scale(1.01);
-}
-
-/* =========================================================
-   META
-========================================================= */
-
-.vault-meta-row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  flex-wrap: wrap;
-
-  gap: 0.5rem;
-
-  margin-bottom: 1rem;
-
-  color: rgba(255,255,255,0.5);
-
-  font-size: 0.82rem;
-
-  letter-spacing: 0.04em;
-}
-
 /* =========================================================
    DESCRIPTION
 ========================================================= */
 
 .vault-book-description {
-  flex: 1;
-
-  white-space: pre-line;
-
-  margin-bottom: 1.5rem;
-
-  color: rgba(255,255,255,0.78);
+  color:
+    rgba(255,255,255,0.78);
 
   line-height: 1.72;
 
   font-size: 0.95rem;
 
-  transition: color 0.3s ease;
-}
-
-.vault-book-card:hover .vault-book-description {
-  color:
-    rgba(255,255,255,0.9);
-}
-
-/* =========================================================
-   TAGS
-========================================================= */
-
-.vault-book-tags {
   margin-bottom: 1.5rem;
-}
-
-.vault-book-tags span {
-  display: inline-flex;
-  align-items: center;
-
-  padding:
-    0.45rem 0.9rem;
-
-  border-radius: 999px;
-
-  background:
-    rgba(255,255,255,0.08);
-
-  border:
-    1px solid rgba(255,255,255,0.08);
-
-  color:
-    rgba(255,255,255,0.84);
-
-  font-size: 0.76rem;
-
-  font-weight: 650;
-
-  letter-spacing: 0.08em;
-
-  text-transform: uppercase;
 }
 
 /* =========================================================
@@ -652,19 +407,11 @@ input {
 ========================================================= */
 
 .vault-read-btn {
-  position: relative;
-
-  overflow: hidden;
-
   border:
     1px solid rgba(255,255,255,0.14);
 
   background:
-    linear-gradient(
-      to bottom,
-      rgba(255,255,255,0.14),
-      rgba(255,255,255,0.05)
-    );
+    rgba(255,255,255,0.08);
 
   color: white;
 
@@ -678,14 +425,8 @@ input {
 
   cursor: pointer;
 
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.08);
-
   transition:
-    transform var(--transition),
-    background var(--transition),
-    border var(--transition),
-    box-shadow var(--transition);
+    all 0.25s ease;
 }
 
 .vault-read-btn:hover {
@@ -693,423 +434,417 @@ input {
     translateY(-2px);
 
   background:
-    linear-gradient(
-      to bottom,
-      rgba(255,255,255,0.18),
-      rgba(255,255,255,0.08)
-    );
-
-  border:
-    1px solid rgba(255,255,255,0.2);
-
-  box-shadow:
-    0 12px 26px rgba(0,0,0,0.25);
+    rgba(255,255,255,0.14);
 }
 
-/* =========================================================
+.vault-read-btn:hover {
+    background:
+        rgba(255,255,255,0.18);
+
+    border:
+        1px solid rgba(255,255,255,0.22);
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 10px 24px rgba(0,0,0,0.22);
+}
+
+/* ========================================
    PDF VIEWER
-========================================================= */
+======================================== */
 
 .pdf-viewer {
-  position: fixed;
-  inset: 0;
+    position: fixed;
+    inset: 0;
 
-  z-index: 9999;
+    background:
+        radial-gradient(
+            circle at top,
+            rgba(120, 80, 120, 0.22),
+            rgba(0,0,0,0.93)
+        );
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    backdrop-filter: blur(14px);
 
-  padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-  backdrop-filter: blur(14px);
+    z-index: 9999;
 
-  background:
-    radial-gradient(
-      circle at top,
-      rgba(120,80,120,0.18),
-      rgba(0,0,0,0.94)
-    );
+    padding: 1rem;
 
-  animation:
-    viewerFade 0.2s ease;
+    animation: viewerFade 0.2s ease;
 }
 
-/* =========================================================
-   PDF WINDOW
-========================================================= */
-
 .pdf-window {
-  position: relative;
+    position: relative;
 
-  width: min(1500px, 100%);
-  height: 94%;
+    width: min(1500px, 100%);
+    height: 94%;
 
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 
-  overflow: hidden;
+    overflow: hidden;
 
-  border-radius: 20px;
+    border-radius: 16px;
 
-  background:
-    linear-gradient(
-      180deg,
-      rgba(36,36,36,0.94),
-      rgba(18,18,18,0.96)
-    );
+    background:
+        rgba(24,24,24,0.88);
 
-  border:
-    1px solid rgba(255,255,255,0.06);
+    backdrop-filter: blur(18px);
 
-  box-shadow:
-    0 25px 60px rgba(0,0,0,0.72);
+    border:
+        1px solid rgba(255,255,255,0.08);
 
-  animation:
-    windowPop 0.22s ease;
+    box-shadow:
+        0 25px 60px rgba(0,0,0,0.72);
+
+    animation: windowPop 0.22s ease;
 }
 
 .pdf-window::before {
-  content: "";
+    content: "";
 
-  position: absolute;
-  inset: 0;
+    position: absolute;
+    inset: 0;
 
-  border:
-    1px solid rgba(255,255,255,0.04);
+    border:
+        1px solid rgba(255,255,255,0.04);
 
-  pointer-events: none;
+    pointer-events: none;
 }
-
-/* =========================================================
-   TOPBAR
-========================================================= */
 
 .pdf-window-topbar {
-  height: 54px;
+    height: 54px;
 
-  flex-shrink: 0;
+    background:
+        linear-gradient(
+            to bottom,
+            #363636,
+            #252525
+        );
 
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+    border-bottom:
+        1px solid rgba(255,255,255,0.06);
 
-  padding: 0 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
-  background:
-    linear-gradient(
-      to bottom,
-      #363636,
-      #252525
-    );
+    padding: 0 1rem;
 
-  border-bottom:
-    1px solid rgba(255,255,255,0.06);
+    flex-shrink: 0;
 }
 
-/* =========================================================
-   WINDOW LEFT
-========================================================= */
+/* ========================================
+   VIEWER TOPBAR
+======================================== */
 
 .window-left {
-  display: flex;
-  align-items: center;
-
-  gap: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
 }
 
 .window-controls {
-  display: flex;
-
-  gap: 0.5rem;
+    display: flex;
+    gap: 0.5rem;
 }
 
 .window-controls span {
-  width: 13px;
-  height: 13px;
+    width: 13px;
+    height: 13px;
 
-  border-radius: 50%;
+    border-radius: 50%;
 }
 
 .window-controls .red {
-  background: #ff5f57;
+    background: #ff5f57;
 }
 
 .window-controls .yellow {
-  background: #febc2e;
+    background: #febc2e;
 }
 
 .window-controls .green {
-  background: #28c840;
+    background: #28c840;
 }
 
 .window-title {
-  max-width: 320px;
+    color: rgba(255,255,255,0.88);
 
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+    font-size: 0.94rem;
 
-  color:
-    rgba(255,255,255,0.88);
+    font-weight: 500;
 
-  font-size: 0.94rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 
-  font-weight: 500;
+    max-width: 320px;
 }
 
-/* =========================================================
-   ACTIONS
-========================================================= */
-
 .window-actions {
-  display: flex;
-  align-items: center;
-
-  gap: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
 }
 
 .window-btn {
-  background:
-    rgba(255,255,255,0.06);
+    background:
+        rgba(255,255,255,0.06);
 
-  border:
-    1px solid rgba(255,255,255,0.08);
+    border:
+        1px solid rgba(255,255,255,0.08);
 
-  color:
-    rgba(255,255,255,0.85);
+    color:
+        rgba(255,255,255,0.85);
 
-  padding:
-    0.5rem 0.9rem;
+    padding: 0.5rem 0.9rem;
 
-  border-radius: 10px;
+    border-radius: 8px;
 
-  cursor: pointer;
+    cursor: pointer;
 
-  transition: var(--transition);
+    transition: 0.2s ease;
 
-  font-size: 0.9rem;
+    font-size: 0.9rem;
 }
 
 .window-btn:hover {
-  background:
-    rgba(255,255,255,0.12);
+    background:
+        rgba(255,255,255,0.12);
 }
 
-/* =========================================================
-   CLOSE
-========================================================= */
-
 .window-close {
-  width: 38px;
-  height: 38px;
+    width: 38px;
+    height: 38px;
 
-  border: none;
+    border-radius: 10px;
 
-  border-radius: 10px;
+    border: none;
 
-  background:
-    rgba(255,255,255,0.08);
+    background:
+        rgba(255,255,255,0.08);
 
-  color: white;
+    color: white;
 
-  font-size: 1.2rem;
+    font-size: 1.2rem;
 
-  cursor: pointer;
+    cursor: pointer;
 
-  transition: var(--transition);
+    transition: 0.2s ease;
 }
 
 .window-close:hover {
-  background: var(--danger);
+    background: #ff5f57;
 }
 
-/* =========================================================
-   FRAME
-========================================================= */
-
 .pdf-frame-wrapper {
-  position: relative;
+    position: relative;
 
-  flex: 1;
+    flex: 1;
 
-  background: #111;
+    background: #111111;
 }
 
 .pdf-frame-wrapper iframe {
-  width: 100%;
-  height: 100%;
-
-  border: none;
-
-  background: white;
-}
-
-/* =========================================================
-   LOADING
-========================================================= */
-
-.viewer-loading {
-  position: absolute;
-  inset: 0;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  background:
-    rgba(0,0,0,0.6);
-
-  color: white;
-
-  font-size: 1rem;
-
-  z-index: 5;
-}
-
-/* =========================================================
-   ANIMATIONS
-========================================================= */
-
-@keyframes viewerFade {
-
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes windowPop {
-
-  from {
-    transform: scale(0.97);
-    opacity: 0;
-  }
-
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-@keyframes dustFloat {
-
-  from {
-    transform: translateY(0);
-  }
-
-  to {
-    transform: translateY(-120px);
-  }
-}
-
-/* =========================================================
-   TABLET
-========================================================= */
-
-@media screen and (max-width: 1100px) {
-
-  .vault-grid {
-    grid-template-columns:
-      repeat(2, minmax(0, 1fr));
-  }
-}
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media screen and (max-width: 700px) {
-
-  .vault-container {
-    padding: 2rem 1rem;
-  }
-
-  .vault-grid {
-    grid-template-columns: 1fr;
-
-    gap: 1.5rem;
-  }
-
-  .vault-book-card {
-    border-radius: 22px;
-
-    min-height: unset;
-  }
-
-  .vault-book-image-wrapper {
-    padding: 1.5rem 1.5rem 0;
-  }
-
-  .vault-book-image {
-    max-width: 170px;
-
-    transform:
-      perspective(1200px)
-      rotateY(-4deg)
-      rotateZ(-2deg);
-  }
-
-  .vault-image-placeholder {
-    width: 170px;
-  }
-
-  .vault-book-content {
-    padding: 1.3rem 1.2rem 1.5rem;
-  }
-
-  .vault-book-content h2 {
-    font-size: 1.65rem;
-  }
-
-  .vault-book-description {
-    font-size: 0.92rem;
-
-    line-height: 1.65;
-  }
-
-  .vault-read-btn {
-    width: 100%;
-  }
-
-  /* PDF VIEWER */
-
-  .pdf-viewer {
-    padding: 0;
-  }
-
-  .pdf-window {
     width: 100%;
     height: 100%;
 
-    border-radius: 0;
-  }
+    border: none;
 
-  .pdf-window-topbar {
-    height: 56px;
+    background: white;
+}
 
-    padding: 0 0.8rem;
-  }
+.viewer-loading {
+    position: absolute;
+    inset: 0;
 
-  .window-title {
-    max-width: 140px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-    font-size: 0.84rem;
-  }
+    background:
+        rgba(0,0,0,0.6);
 
-  .window-actions {
-    gap: 0.4rem;
-  }
+    color: white;
 
-  .window-btn {
-    display: none;
-  }
+    font-size: 1rem;
 
-  .window-close {
-    width: 34px;
-    height: 34px;
-  }
+    z-index: 5;
+}
+
+/* ========================================
+   ANIMATIONS
+======================================== */
+
+@keyframes viewerFade {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes windowPop {
+    from {
+        transform: scale(0.96);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes dustFloat {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-120px);
+    }
+}
+
+@keyframes vaultAmbient {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes skeletonPulse {
+    0% {
+        opacity: 0.5;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.5;
+    }
+}
+
+/* ========================================
+   TABLET
+======================================== */
+
+@media screen and (max-width: 1100px) {
+
+    .vault-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media screen and (max-width: 700px) {
+
+    .vault-container {
+        padding: 2rem 1rem;
+    }
+
+    .vault-grid {
+        grid-template-columns: 1fr;
+
+        gap: 1.5rem;
+    }
+
+    .vault-book-card {
+        border-radius: 18px;
+    }
+
+    .vault-book-image-wrapper {
+        padding: 1.5rem 1.5rem 0;
+    }
+
+    .vault-book-image {
+        max-width: 180px;
+
+        transform:
+            perspective(1200px)
+            rotateY(-5deg)
+            rotateZ(-3deg);
+    }
+
+    .vault-image-placeholder {
+        width: 180px;
+    }
+
+    .vault-book-content {
+        padding: 1.3rem 1.2rem 1.5rem;
+    }
+
+    .vault-book-content h2 {
+        font-size: 1.75rem;
+    }
+
+    .vault-book-description {
+        font-size: 0.92rem;
+
+        line-height: 1.6;
+    }
+
+    .vault-read-btn {
+        width: 100%;
+    }
+
+    /* mobile viewer */
+
+    .pdf-viewer {
+        padding: 0;
+    }
+
+    .pdf-window {
+        width: 100%;
+        height: 100%;
+
+        border-radius: 0;
+    }
+
+    .pdf-window-topbar {
+        height: 56px;
+
+        padding: 0 0.8rem;
+    }
+
+    .window-title {
+        max-width: 140px;
+
+        font-size: 0.84rem;
+    }
+
+    .window-actions {
+        gap: 0.4rem;
+    }
+
+    .window-btn {
+        display: none;
+    }
+
+    .window-close {
+        width: 34px;
+        height: 34px;
+    }
 }
