@@ -197,8 +197,6 @@
 
     overflow: hidden;
 
-    isolation: isolate;
-
     display: flex;
     flex-direction: column;
 
@@ -367,8 +365,6 @@
 .vault-book-image-wrapper {
     position: relative;
 
-    overflow: hidden;
-
     z-index: 1;
 
     width: 100%;
@@ -430,13 +426,11 @@
 
     position: absolute;
 
-    top: 2rem;
+    right: calc(50% - 122px);
+    top: 2.5rem;
 
-    right: calc(50% - 116px);
-
-    width: 10px;
-
-    height: 78%;
+    width: 12px;
+    height: calc(100% - 2.5rem);
 
     background:
         repeating-linear-gradient(
@@ -448,11 +442,9 @@
 
     border-radius: 0 6px 6px 0;
 
-    opacity: 0.7;
+    opacity: 0.9;
 
-    z-index: 0;
-
-    pointer-events: none;
+    z-index: -1;
 }
 
 /* placeholder */
@@ -1045,6 +1037,8 @@
     .vault-read-btn {
         width: 100%;
     }
+
+    /* mobile viewer */
 
     .pdf-viewer {
         padding: 0;
