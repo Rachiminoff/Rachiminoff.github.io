@@ -295,11 +295,15 @@ function Vault() {
 
                                 {/* DESCRIPTION */}
 
-                                <p className="vault-book-description">
+                                <details className="vault-description-dropdown">
+                                    <summary>
+                                        Description
+                                    </summary>
 
-                                    {item.description}
-
-                                </p>
+                                    <p className="vault-book-description">
+                                        {item.description}
+                                    </p>
+                                </details>
 
                                 {/* TAG */}
 
