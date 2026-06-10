@@ -451,20 +451,27 @@
 .vault-description-dropdown {
     margin-top: 0.75rem;
     width: 100%;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+
+    border-top: 1px solid rgba(255,255,255,0.08);
+
     padding-top: 0.75rem;
 
     summary {
         display: flex;
         align-items: center;
         justify-content: space-between;
+
         cursor: pointer;
+
         list-style: none;
         user-select: none;
+
         font-size: 0.85rem;
         font-weight: 600;
-        color: rgba(255, 255, 255, 0.8);
-        transition: color 0.2s ease;
+
+        color: rgba(255,255,255,0.8);
+
+        transition: color 0.25s ease;
 
         &:hover {
             color: white;
@@ -475,22 +482,63 @@
         }
 
         &::after {
-            content: "▼";
-            font-size: 0.7rem;
-            transition: transform 0.25s ease;
+            content: "";
+            width: 10px;
+            height: 10px;
+
+            border-right: 2px solid currentColor;
+            border-bottom: 2px solid currentColor;
+
+            transform: rotate(45deg);
+            transition: transform 0.3s ease;
         }
     }
 
     &[open] summary::after {
-        transform: rotate(180deg);
+        transform: rotate(225deg);
     }
+}
 
-    .vault-book-description {
-        margin-top: 0.75rem;
-        line-height: 1.6;
-        color: rgba(255, 255, 255, 0.75);
-        white-space: pre-wrap;
-    }
+/* animated wrapper */
+
+.vault-description-content {
+    display: grid;
+    grid-template-rows: 0fr;
+
+    transition:
+        grid-template-rows 0.35s ease,
+        opacity 0.35s ease;
+
+    opacity: 0;
+}
+
+.vault-description-content-inner {
+    overflow: hidden;
+}
+
+.vault-description-dropdown[open] .vault-description-content {
+    grid-template-rows: 1fr;
+    opacity: 1;
+}
+
+.vault-book-description {
+    margin-top: 0.75rem;
+
+    line-height: 1.65;
+
+    color: rgba(255,255,255,0.75);
+
+    white-space: pre-wrap;
+
+    transform: translateY(-8px);
+
+    transition:
+        transform 0.35s ease,
+        color 0.3s ease;
+}
+
+.vault-description-dropdown[open] .vault-book-description {
+    transform: translateY(0);
 }
 
 .vault-book-card:hover .vault-book-content {
