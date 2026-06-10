@@ -12,6 +12,32 @@ import wais03 from '../assets/images/ww3.jpg';
 
 import '../assets/styles/Project.scss';
 
+function ItchIcon() {
+    return (
+        <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+        >
+            <path d="M20.9 7.2c-.2-.3-.6-.5-1-.5h-2.3l-1.7-2.1c-.3-.3-.7-.5-1.1-.5s-.8.2-1.1.5L12 6.7 10.3 4.6c-.3-.3-.7-.5-1.1-.5s-.8.2-1.1.5L6.4 6.7H4.1c-.4 0-.8.2-1 .5C2.4 8.2 2 9.6 2 11.1v2.3c0 1.1.9 2 2 2h.2v2.2c0 .6.5 1.1 1.1 1.1h1.3c.6 0 1.1-.5 1.1-1.1v-2.2h6.6v2.2c0 .6.5 1.1 1.1 1.1h1.3c.6 0 1.1-.5 1.1-1.1v-2.2h.2c1.1 0 2-.9 2-2v-2.3c0-1.5-.4-2.9-1.1-3.9z"/>
+        </svg>
+    );
+}
+
+function GlobeIcon() {
+    return (
+        <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+        >
+            <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm7.9 9h-3.1c-.2-2-.8-3.8-1.8-5.3 2.4.9 4.2 3 4.9 5.3zm-7.9-7c1.2 1.4 2 3.6 2.2 7H9.8c.2-3.4 1-5.6 2.2-7zM4.1 13h3.1c.2 2 .8 3.8 1.8 5.3-2.4-.9-4.2-3-4.9-5.3zm3.1-2H4.1c.7-2.3 2.5-4.4 4.9-5.3-1 1.5-1.6 3.3-1.8 5.3zm4.8 9c-1.2-1.4-2-3.6-2.2-7h4.4c-.2 3.4-1 5.6-2.2 7zm3-1.7c1-1.5 1.6-3.3 1.8-5.3h3.1c-.7 2.3-2.5 4.4-4.9 5.3z"/>
+        </svg>
+    );
+}
+
 function GitHubIcon() {
     return (
         <svg
@@ -154,6 +180,8 @@ const projects = [
         featured: true,
         link: "https://github.com/Rachiminoff/FREEFREEFREE",
 
+        itchLink: "https://daeowob.itch.io/free-free-free",
+
         video:
             "https://www.youtube.com/embed/CAeP5QStOrE?si=M8axOWtdfKER_7OF",
 
@@ -209,6 +237,7 @@ const projects = [
         ]
     }
 ];
+
 
 function Project() {
 
@@ -347,7 +376,20 @@ function Project() {
                                         rel="noreferrer"
                                         className="demo-link"
                                     >
+                                        <GlobeIcon />
                                         <span>Live Demo</span>
+                                    </a>
+                                )}
+
+                                {project.itchLink && (
+                                    <a
+                                        href={project.itchLink}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                        className="itch-link"
+                                    >
+                                        <ItchIcon />
+                                        <span>Download Demo</span>
                                     </a>
                                 )}
 
