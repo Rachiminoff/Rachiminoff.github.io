@@ -401,30 +401,52 @@
 .project-links {
     margin-top: auto;
 
-    padding-top: 12px;
+    padding-top: 16px;
+
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 12px;
 }
 
-.github-link {
+.github-link,
+.demo-link {
     display: inline-flex;
 
     align-items: center;
     gap: 10px;
 
-    text-decoration: none;
+    padding: 10px 16px;
 
-    color: #c5c5c5;
+    border-radius: 12px;
+
+    text-decoration: none;
 
     font-weight: 600;
 
     transition:
+        background 0.2s ease,
         color 0.2s ease,
-        transform 0.2s ease;
+        transform 0.2s ease,
+        border-color 0.2s ease;
+}
+
+/* GitHub */
+
+.github-link {
+    background: rgba(255,255,255,0.04);
+
+    border: 1px solid rgba(255,255,255,0.08);
+
+    color: #c5c5c5;
 }
 
 .github-link:hover {
+    background: rgba(255,255,255,0.08);
+
     color: white;
 
-    transform: translateX(4px);
+    transform: translateY(-2px);
 }
 
 .github-link svg {
@@ -433,6 +455,32 @@
 
 .github-link:hover svg {
     transform: rotate(-8deg);
+}
+
+/* Live Demo */
+
+.demo-link {
+    background: rgba(124,92,255,0.16);
+
+    border: 1px solid rgba(124,92,255,0.28);
+
+    color: #ddd6ff;
+}
+
+.demo-link:hover {
+    background: rgba(124,92,255,0.25);
+
+    border-color: rgba(124,92,255,0.4);
+
+    color: white;
+
+    transform: translateY(-2px);
+}
+
+.demo-link::before {
+    content: "🚀";
+
+    font-size: 0.9rem;
 }
 
 /* =========================

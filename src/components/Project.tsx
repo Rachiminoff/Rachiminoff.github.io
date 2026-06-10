@@ -340,6 +340,17 @@ function Project() {
                                     <span>View Project</span>
                                 </a>
 
+                                {project.liveDemo && (
+                                    <a
+                                        href={project.liveDemo}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                        className="demo-link"
+                                    >
+                                        <span>Live Demo</span>
+                                    </a>
+                                )}
+
                             </div>
 
                         </div>
