@@ -449,95 +449,86 @@
 }
 
 .vault-description-dropdown {
-    margin-top: 0.75rem;
-    width: 100%;
+    margin-top: 0.8rem;
+    margin-bottom: 1.3rem;
 
     border-top: 1px solid rgba(255,255,255,0.08);
-
-    padding-top: 0.75rem;
-
-    summary {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-
-        cursor: pointer;
-
-        list-style: none;
-        user-select: none;
-
-        font-size: 0.85rem;
-        font-weight: 600;
-
-        color: rgba(255,255,255,0.8);
-
-        transition: color 0.25s ease;
-
-        &:hover {
-            color: white;
-        }
-
-        &::-webkit-details-marker {
-            display: none;
-        }
-
-        &::after {
-            content: "";
-            width: 10px;
-            height: 10px;
-
-            border-right: 2px solid currentColor;
-            border-bottom: 2px solid currentColor;
-
-            transform: rotate(45deg);
-            transition: transform 0.3s ease;
-        }
-    }
-
-    &[open] summary::after {
-        transform: rotate(225deg);
-    }
+    padding-top: 0.8rem;
 }
 
-/* animated wrapper */
+.vault-description-toggle {
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background: transparent;
+    border: none;
+
+    color: rgba(255,255,255,0.82);
+
+    font-size: 0.88rem;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: color .25s ease;
+}
+
+.vault-description-toggle:hover {
+    color: white;
+}
+
+.vault-arrow {
+    transition: transform .3s ease;
+    font-size: .75rem;
+}
+
+.vault-arrow.expanded {
+    transform: rotate(180deg);
+}
 
 .vault-description-content {
     display: grid;
     grid-template-rows: 0fr;
 
-    transition:
-        grid-template-rows 0.35s ease,
-        opacity 0.35s ease;
-
     opacity: 0;
+
+    transition:
+        grid-template-rows .35s ease,
+        opacity .3s ease;
 }
 
-.vault-description-content-inner {
+.vault-description-content > * {
     overflow: hidden;
 }
 
-.vault-description-dropdown[open] .vault-description-content {
+.vault-description-content.expanded {
     grid-template-rows: 1fr;
     opacity: 1;
 }
 
 .vault-book-description {
-    margin-top: 0.75rem;
-
-    line-height: 1.65;
+    margin-top: 0.9rem;
 
     color: rgba(255,255,255,0.75);
+
+    line-height: 1.7;
 
     white-space: pre-wrap;
 
     transform: translateY(-8px);
 
     transition:
-        transform 0.35s ease,
-        color 0.3s ease;
+        transform .35s ease,
+        opacity .35s ease;
+
+    opacity: 0;
 }
 
-.vault-description-dropdown[open] .vault-book-description {
+.vault-description-content.expanded .vault-book-description {
+    opacity: 1;
     transform: translateY(0);
 }
 
