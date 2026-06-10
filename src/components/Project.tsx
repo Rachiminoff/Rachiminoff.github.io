@@ -119,7 +119,7 @@ const projects = [
 
     {
         title: "Webnovel Extractor",
-        role: "Main Developer",
+        role: "Sole Developer",
         roleClass: "lead",
         featured: false,
         link: "https://github.com/Rachiminoff/Webnovel-Extractor",
