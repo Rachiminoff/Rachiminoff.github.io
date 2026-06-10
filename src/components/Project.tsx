@@ -185,6 +185,8 @@ const projects = [
         featured: false,
         link: "https://github.com/Rachiminoff/Wais_Wallet",
 
+        liveDemo: "https://wais-wallet.vercel.app",
+
         images: [wais00, wais01, wais02, wais03],
 
         oneliner:
