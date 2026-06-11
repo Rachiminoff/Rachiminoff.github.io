@@ -20,20 +20,32 @@ function ItchIcon() {
             viewBox="0 0 24 24"
             fill="currentColor"
         >
-            <path d="M20.9 7.2c-.2-.3-.6-.5-1-.5h-2.3l-1.7-2.1c-.3-.3-.7-.5-1.1-.5s-.8.2-1.1.5L12 6.7 10.3 4.6c-.3-.3-.7-.5-1.1-.5s-.8.2-1.1.5L6.4 6.7H4.1c-.4 0-.8.2-1 .5C2.4 8.2 2 9.6 2 11.1v2.3c0 1.1.9 2 2 2h.2v2.2c0 .6.5 1.1 1.1 1.1h1.3c.6 0 1.1-.5 1.1-1.1v-2.2h6.6v2.2c0 .6.5 1.1 1.1 1.1h1.3c.6 0 1.1-.5 1.1-1.1v-2.2h.2c1.1 0 2-.9 2-2v-2.3c0-1.5-.4-2.9-1.1-3.9z"/>
-        </svg>
-    );
-}
+            {/* controller body (PlayStation-like silhouette) */}
+            <path d="
+                M6.5 8
+                C5 8 4 9.5 4 11v2
+                c0 2 1.2 3 2.6 3
+                c1 1 2.2 1 3-.5l.4-.7h4l.4.7
+                c.8 1.5 2 1.5 3 .5
+                C19 16 20 15 20 13v-2
+                c0-1.5-1-3-2.5-3
+                H6.5z
+            "/>
 
-function GlobeIcon() {
-    return (
-        <svg
-            width="18"
-            height="18"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-        >
-            <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm7.9 9h-3.1c-.2-2-.8-3.8-1.8-5.3 2.4.9 4.2 3 4.9 5.3zm-7.9-7c1.2 1.4 2 3.6 2.2 7H9.8c.2-3.4 1-5.6 2.2-7zM4.1 13h3.1c.2 2 .8 3.8 1.8 5.3-2.4-.9-4.2-3-4.9-5.3zm3.1-2H4.1c.7-2.3 2.5-4.4 4.9-5.3-1 1.5-1.6 3.3-1.8 5.3zm4.8 9c-1.2-1.4-2-3.6-2.2-7h4.4c-.2 3.4-1 5.6-2.2 7zm3-1.7c1-1.5 1.6-3.3 1.8-5.3h3.1c-.7 2.3-2.5 4.4-4.9 5.3z"/>
+            {/* touchpad */}
+            <rect x="9" y="9" width="6" height="2" rx="0.5" />
+
+            {/* left analog stick */}
+            <circle cx="9" cy="13" r="1.1" />
+
+            {/* right analog stick */}
+            <circle cx="15" cy="13" r="1.1" />
+
+            {/* face buttons (PS-style diamond) */}
+            <circle cx="17" cy="11.5" r="0.6" /> {/* triangle */}
+            <circle cx="18" cy="12.8" r="0.6" /> {/* circle */}
+            <circle cx="17" cy="14.1" r="0.6" /> {/* cross */}
+            <circle cx="16" cy="12.8" r="0.6" /> {/* square */}
         </svg>
     );
 }
@@ -376,7 +388,6 @@ function Project() {
                                         rel="noreferrer"
                                         className="demo-link"
                                     >
-                                        <GlobeIcon />
                                         <span>Live Demo</span>
                                     </a>
                                 )}
