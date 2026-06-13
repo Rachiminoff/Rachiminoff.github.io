@@ -219,7 +219,7 @@ function Main() {
                         onClick={handleSecretClick}
                         style={{ cursor: "pointer" }}
                     >
-                        Full-Stack Developer (Product & Systems Focused)
+                        Full-Stack Developer 
                     </p>
 
                     <div className="mobile_social_icons">
@@ -272,7 +272,7 @@ function Main() {
                     ========================= */}
                     {showVaultPrompt && vaultLockedUntil && (
                         <div className="vault-locked">
-                            <p>🔒 Vault is locked</p>
+                            <p>🔒 Vault is locked... Who are you?</p>
                             <p>
                                 Unlocks at:{" "}
                                 {new Date(vaultLockedUntil).toLocaleString()}
