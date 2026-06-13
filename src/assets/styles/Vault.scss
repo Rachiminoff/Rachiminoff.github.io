@@ -186,6 +186,8 @@
         repeat(auto-fit, minmax(290px, 1fr));
 
     gap: 2rem;
+
+    align-items: start;
 }
 
 /* ========================================
@@ -200,7 +202,8 @@
     display: flex;
     flex-direction: column;
 
-    min-height: 100%;
+    height: fit-content;
+    align-self: start;
 
     border-radius: 24px;
 
@@ -511,20 +514,22 @@
 
 .vault-book-description {
     margin-top: 0.9rem;
+    margin-bottom: 1.5rem;
 
     color: rgba(255,255,255,0.75);
 
     line-height: 1.7;
+    font-size: 0.96rem;
 
     white-space: pre-wrap;
 
+    opacity: 0;
     transform: translateY(-8px);
 
     transition:
         transform .35s ease,
-        opacity .35s ease;
-
-    opacity: 0;
+        opacity .35s ease,
+        color .3s ease;
 }
 
 .vault-description-content.expanded .vault-book-description {
@@ -608,20 +613,6 @@
     letter-spacing: 0.04em;
 
     flex-wrap: wrap;
-}
-
-.vault-book-description {
-    flex: 1;
-
-    margin-bottom: 1.5rem;
-
-    color: rgba(255,255,255,0.74);
-
-    line-height: 1.72;
-
-    font-size: 0.96rem;
-
-    transition: color 0.3s ease;
 }
 
 .vault-book-card:hover .vault-book-description {
