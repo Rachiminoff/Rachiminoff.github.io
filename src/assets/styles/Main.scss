@@ -20,6 +20,9 @@
   background: transparent !important;
 }
 
+/* =========================
+   ABOUT SECTION
+========================= */
 .about-section {
     display: flex;
     gap: 30px;
@@ -69,50 +72,224 @@
 
 .about-section .image-wrapper {
     z-index: 2;
+
     img {
         width: 150px;
         border-radius: 50%;
     }
 }
 
+/* =========================
+   VAULT FORM (UPGRADED)
+========================= */
+.vault-form {
+    margin-top: 12px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+
+    animation: fadeInUp 0.25s ease-out;
+}
+
+.vault-input {
+    padding: 10px 12px;
+    border-radius: 8px;
+
+    border: 1px solid rgba(255,255,255,0.15);
+    background: rgba(0,0,0,0.45);
+    color: white;
+
+    outline: none;
+    transition: 0.2s ease;
+    backdrop-filter: blur(6px);
+}
+
+.vault-input:focus {
+    border-color: rgba(120, 200, 255, 0.7);
+    box-shadow: 0 0 12px rgba(120, 200, 255, 0.25);
+}
+
+.vault-button {
+    padding: 10px 14px;
+    border-radius: 8px;
+
+    border: 1px solid rgba(255,255,255,0.12);
+    background: linear-gradient(135deg, #2b2b2b, #111);
+
+    color: white;
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+.vault-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+}
+
+.vault-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* =========================
+   LOCKED STATE
+========================= */
+.vault-locked {
+    margin-top: 14px;
+    padding: 14px 16px;
+
+    border-radius: 10px;
+
+    background: rgba(255, 0, 0, 0.08);
+    border: 1px solid rgba(255, 80, 80, 0.25);
+
+    color: #ff6b6b;
+    font-size: 0.9rem;
+
+    animation: fadeInUp 0.3s ease-out;
+}
+
+.vault-locked p {
+    margin: 4px 0;
+}
+
+/* =========================
+   MODAL (GLASS + GLOW)
+========================= */
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(6px);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    z-index: 9999;
+
+    animation: fadeIn 0.2s ease-out;
+}
+
+.modal {
+    width: min(420px, 92%);
+    padding: 22px 20px;
+
+    border-radius: 14px;
+
+    background: rgba(20, 20, 20, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    color: white;
+    text-align: center;
+
+    box-shadow:
+        0 10px 40px rgba(0,0,0,0.6),
+        0 0 0 1px rgba(255,255,255,0.05);
+
+    transform: scale(0.95);
+    animation: popIn 0.18s ease-out forwards;
+}
+
+.modal h2 {
+    margin-bottom: 10px;
+    font-size: 1.4rem;
+}
+
+.modal p {
+    opacity: 0.85;
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+.modal button {
+    margin-top: 16px;
+    padding: 8px 14px;
+
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.15);
+
+    background: rgba(255,255,255,0.08);
+    color: white;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.modal button:hover {
+    background: rgba(255,255,255,0.15);
+}
+
+/* =========================
+   ICON BUTTON
+========================= */
+.icon-btn {
+  background: transparent !important;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: inherit;
+}
+
+.icon-btn:hover {
+  background: transparent !important;
+}
+
+/* =========================
+   ABOUT SECTION BASE
+========================= */
 .about p {
     text-align: center;
     padding-top: 30%;
     padding-bottom: 30%;
 }
 
+/* =========================
+   ANIMATIONS
+========================= */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes popIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* =========================
+   MOBILE
+========================= */
 @media screen {
+
     @media (max-width: 567px) {
-        .nav-left{
-            padding-top: 20px;
-            float:left;
-        }
-
-        .nav-left img {
-            height: 35px
-        }
-
-        .nav-right {
-            float:right;
-        }
-
-        .nav-right li {
-            padding: 10px 15px;
-            list-style:none;
-            font-size:13px;
-            color:white;
-            width: 10%;
-        }
-
-        .nav-right ul {
-            list-style-type: none;
-            margin: 0px;
-            padding: 0px;
-        }
-
-        body {
-            width: 100%;
-        }
 
         .about {
             padding-left: 5%;
@@ -122,6 +299,7 @@
     }
 
     @media (max-width:768px) {
+
         .about-section h1 {
             font-size: 4em !important;
             text-align: left;
@@ -145,7 +323,7 @@
             flex-direction: row;
             gap: 10px;
             color: white;
-    
+
             svg {
                 font-size: 1.8em;
             }
