@@ -76,18 +76,20 @@ function Main() {
             } else if (data.locked) {
 
                 alert(
-                    `Vault access temporarily locked.\n\nPlease try again after:\n${new Date(
+                    `Too many attempts.\nLocked until ${new Date(
                         data.lockedUntil
                     ).toLocaleString()}`
                 );
 
-            } else {
+            } else if (data.remaining !== undefined) {
 
                 alert(
-                    `Incorrect code.\n${
-                        data.remaining ?? 0
-                    } attempt(s) remaining before lockout.`
+                    `Incorrect code.\n${data.remaining} attempt(s) remaining.`
                 );
+
+            } else {
+
+                alert("Incorrect code!");
 
             }
 
