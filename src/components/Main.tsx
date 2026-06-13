@@ -11,13 +11,49 @@ import PDFViewer from './PDFViewer';
 
 import '../assets/styles/Main.scss';
 
+/* =========================
+   ERROR MODAL
+========================= */
+function ErrorModal({
+    open,
+    title,
+    message,
+    onClose
+}: {
+    open: boolean;
+    title: string;
+    message: string;
+    onClose: () => void;
+}) {
+    if (!open) return null;
+
+    return (
+        <div className="modal-backdrop" onClick={onClose}>
+            <div className="modal" onClick={(e) => e.stopPropagation()}>
+                <h2>{title}</h2>
+
+                <p style={{ whiteSpace: "pre-line" }}>
+                    {message}
+                </p>
+
+                <button onClick={onClose}>
+                    Close
+                </button>
+            </div>
+        </div>
+    );
+}
+
+/* =========================
+   MAIN COMPONENT
+========================= */
 function Main() {
 
     const [clickCount, setClickCount] = useState(0);
 
     const [showVaultPrompt, setShowVaultPrompt] = useState(false);
 
-    const [vaultInput, setVaultInput] = useState('');
+    const [vaultInput, setVaultInput] = useState("");
 
     const [vaultUnlocked, setVaultUnlocked] = useState(false);
 
@@ -25,46 +61,46 @@ function Main() {
 
     const [viewerUrl, setViewerUrl] = useState<string | null>(null);
 
+    const [vaultLockedUntil, setVaultLockedUntil] = useState<number | null>(null);
+
+    const [errorModal, setErrorModal] = useState<{
+        open: boolean;
+        title: string;
+        message: string;
+    } | null>(null);
+
+    /* =========================
+       SECRET CLICK TRIGGER
+    ========================= */
     const handleSecretClick = () => {
-
         const newCount = clickCount + 1;
-
         setClickCount(newCount);
 
-        // unlock trigger at 5 clicks
-
         if (newCount >= 5) {
-
             setShowVaultPrompt(true);
-
             setClickCount(0);
-
         }
-
     };
 
+    /* =========================
+       VAULT SUBMIT
+    ========================= */
     const handleVaultSubmit = async (
         e: React.FormEvent<HTMLFormElement>
     ) => {
-
         e.preventDefault();
 
         setLoading(true);
 
         try {
-
-            const response = await fetch('/api/unlock', {
-
-                method: 'POST',
-
+            const response = await fetch("/api/unlock", {
+                method: "POST",
                 headers: {
-                    'Content-Type': 'application/json',
+                    "Content-Type": "application/json",
                 },
-
                 body: JSON.stringify({
                     password: vaultInput,
                 }),
-
             });
 
             const data = await response.json();
@@ -75,21 +111,31 @@ function Main() {
 
             } else if (data.locked) {
 
-                alert(
-                    `Too many attempts.\nLocked until ${new Date(
+                setVaultLockedUntil(data.lockedUntil);
+
+                setErrorModal({
+                    open: true,
+                    title: "Vault Locked",
+                    message: `Too many attempts.\nLocked until ${new Date(
                         data.lockedUntil
                     ).toLocaleString()}`
-                );
+                });
 
             } else if (data.remaining !== undefined) {
 
-                alert(
-                    `Incorrect code.\n${data.remaining} attempt(s) remaining.`
-                );
+                setErrorModal({
+                    open: true,
+                    title: "Incorrect Code",
+                    message: `Wrong code.\n${data.remaining} attempt(s) remaining.`
+                });
 
             } else {
 
-                alert("Incorrect code!");
+                setErrorModal({
+                    open: true,
+                    title: "Incorrect Code",
+                    message: "The code you entered is not valid."
+                });
 
             }
 
@@ -97,50 +143,46 @@ function Main() {
 
             console.error(error);
 
-            alert("Something went wrong.");
+            setErrorModal({
+                open: true,
+                title: "Error",
+                message: "Something went wrong. Please try again."
+            });
 
         }
 
         setLoading(false);
-
-        setVaultInput('');
-
+        setVaultInput("");
         setShowVaultPrompt(false);
-
     };
 
+    /* =========================
+       CV VIEWER
+    ========================= */
     const openCVViewer = () => {
-
-       setViewerUrl("/YambaoResume.pdf");;
-
+        setViewerUrl("/YambaoResume.pdf");
     };
 
     const closeViewer = () => {
-
         setViewerUrl(null);
-
     };
 
+    /* =========================
+       UI
+    ========================= */
     return (
-
         <div className="container">
 
             <div className="about-section">
 
-                {/* Profile Picture */}
-
                 <div className="image-wrapper">
-
                     <img
                         src={profilePic}
                         alt="Tanya Denise Yambao"
                     />
-
                 </div>
 
                 <div className="content">
-
-                    {/* Desktop Socials */}
 
                     <div className="social_icons">
 
@@ -160,16 +202,11 @@ function Main() {
                             <LinkedInIcon />
                         </a>
 
-                        <button
-                            className="icon-btn"
-                            onClick={openCVViewer}
-                        >
+                        <button className="icon-btn" onClick={openCVViewer}>
                             <DescriptionIcon />
                         </button>
 
                     </div>
-
-                    {/* CLICK TARGET */}
 
                     <h1
                         onClick={handleSecretClick}
@@ -185,44 +222,30 @@ function Main() {
                         Full-Stack Developer (Product & Systems Focused)
                     </p>
 
-                    {/* Mobile Socials */}
-
                     <div className="mobile_social_icons">
 
-                        <a
-                            href="https://github.com/Rachiminoff"
-                            target="_blank"
-                            rel="noreferrer"
-                        >
+                        <a href="https://github.com/Rachiminoff" target="_blank" rel="noreferrer">
                             <GitHubIcon />
                         </a>
 
-                        <a
-                            href="https://www.linkedin.com/in/tanya-denise-yambao-9677223b9/"
-                            target="_blank"
-                            rel="noreferrer"
-                        >
+                        <a href="https://www.linkedin.com/in/tanya-denise-yambao-9677223b9/" target="_blank" rel="noreferrer">
                             <LinkedInIcon />
                         </a>
 
-                        <button
-                            className="icon-btn"
-                            onClick={openCVViewer}
-                        >
+                        <button className="icon-btn" onClick={openCVViewer}>
                             <DescriptionIcon />
                         </button>
 
                     </div>
 
-                    {/* Vault Prompt */}
-
-                    {showVaultPrompt && (
-
+                    {/* =========================
+                        VAULT INPUT (HIDDEN WHEN LOCKED)
+                    ========================= */}
+                    {showVaultPrompt && !vaultLockedUntil && (
                         <form
                             onSubmit={handleVaultSubmit}
                             className="vault-form"
                         >
-
                             <input
                                 type="password"
                                 placeholder="Enter code"
@@ -241,9 +264,20 @@ function Main() {
                             >
                                 {loading ? "Checking..." : "Unlock"}
                             </button>
-
                         </form>
+                    )}
 
+                    {/* =========================
+                        LOCKED MESSAGE
+                    ========================= */}
+                    {showVaultPrompt && vaultLockedUntil && (
+                        <div className="vault-locked">
+                            <p>🔒 Vault is locked</p>
+                            <p>
+                                Unlocks at:{" "}
+                                {new Date(vaultLockedUntil).toLocaleString()}
+                            </p>
+                        </div>
                     )}
 
                 </div>
@@ -252,11 +286,16 @@ function Main() {
 
             {vaultUnlocked && <Vault />}
 
-            {/* PDF VIEWER */}
-
             <PDFViewer
                 url={viewerUrl}
                 onClose={closeViewer}
+            />
+
+            <ErrorModal
+                open={!!errorModal?.open}
+                title={errorModal?.title || ""}
+                message={errorModal?.message || ""}
+                onClose={() => setErrorModal(null)}
             />
 
         </div>
