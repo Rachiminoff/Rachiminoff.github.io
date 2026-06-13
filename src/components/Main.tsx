@@ -73,9 +73,21 @@ function Main() {
 
                 setVaultUnlocked(true);
 
+            } else if (data.locked) {
+
+                alert(
+                    `Vault access temporarily locked.\n\nPlease try again after:\n${new Date(
+                        data.lockedUntil
+                    ).toLocaleString()}`
+                );
+
             } else {
 
-                alert("Incorrect code!");
+                alert(
+                    `Incorrect code.\n${
+                        data.remaining ?? 0
+                    } attempt(s) remaining before lockout.`
+                );
 
             }
 
