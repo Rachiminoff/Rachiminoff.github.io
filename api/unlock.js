@@ -1,103 +1,42 @@
 import { createClient } from "@supabase/supabase-js";
 
 export default async function handler(req, res) {
+    try {
 
-    if (req.method !== "POST") {
+        console.log("SUPABASE_URL exists:", !!process.env.SUPABASE_URL);
+        console.log(
+            "SERVICE_ROLE exists:",
+            !!process.env.SUPABASE_SERVICE_ROLE_KEY
+        );
 
-        return res.status(405).json({
-            success: false,
-            error: "Method not allowed",
-        });
+        const supabase = createClient(
+            process.env.SUPABASE_URL!,
+            process.env.SUPABASE_SERVICE_ROLE_KEY!
+        );
 
-    }
-
-    const ip =
-        req.headers["x-forwarded-for"]
-            ?.toString()
-            .split(",")[0]
-        || req.socket.remoteAddress
-        || "unknown";
-
-    const { password } = req.body;
-
-    const { data: existing } = await supabase
-        .from("vault_attempts")
-        .select("*")
-        .eq("ip", ip)
-        .maybeSingle();
-
-    // CHECK LOCK
-
-    if (
-        existing?.locked_until &&
-        new Date(existing.locked_until) > new Date()
-    ) {
-
-        return res.status(429).json({
-            success: false,
-            locked: true,
-            lockedUntil: existing.locked_until,
-        });
-
-    }
-
-    // CORRECT PASSWORD
-
-    if (password === process.env.VAULT_PASSWORD) {
-
-        await supabase
+        const { data, error } = await supabase
             .from("vault_attempts")
-            .delete()
-            .eq("ip", ip);
+            .select("*")
+            .limit(1);
+
+        console.log("Data:", data);
+        console.log("Error:", error);
 
         return res.status(200).json({
             success: true,
+            debug: true,
+            data,
+            error,
         });
 
-    }
+    } catch (err) {
 
-    // WRONG PASSWORD
+        console.error("CRASH:", err);
 
-    const attempts =
-        (existing?.attempts || 0) + 1;
-
-    // LOCK AFTER 4 ATTEMPTS
-
-    if (attempts >= 4) {
-
-        const lockedUntil = new Date(
-            Date.now() + 3 * 60 * 60 * 1000
-        );
-
-        await supabase
-            .from("vault_attempts")
-            .upsert({
-                ip,
-                attempts,
-                locked_until:
-                    lockedUntil.toISOString(),
-            });
-
-        return res.status(429).json({
+        return res.status(500).json({
             success: false,
-            locked: true,
-            lockedUntil,
+            error: String(err),
         });
 
     }
-
-    // SAVE FAILED ATTEMPT
-
-    await supabase
-        .from("vault_attempts")
-        .upsert({
-            ip,
-            attempts,
-        });
-
-    return res.status(401).json({
-        success: false,
-        remaining: 4 - attempts,
-    });
-
 }
